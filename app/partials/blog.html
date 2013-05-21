@@ -1,3 +1,8 @@
-<p>This is the blog!</p>
+<div ng-controller="BlogCtrl">
+    <div ng-repeat="post in posts">
+        <h4>{{post.title}}</h4>
+        <p>{{post.body}}</p>
+    </div>
 
-<a href="/blog/newPost">New Post</a>
+    <a href="#/blog/new">New Post</a>
+</div>

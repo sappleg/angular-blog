@@ -1,1 +1,15 @@
-<p>This is where I make a new post!</p>
+<form name="NewPost" ng-controller="BlogCtrl">
+    <div ng-class="{error: NewPost.name.$invalid}">
+        <label>Title
+            <input type="text" name="title" ng-model="post.title" required>
+        </label>
+    </div>
+
+    <div ng-class="{error: NewPost.name.$invalid}">
+        <label>Body
+            <textarea name="body" ng-model="post.body" required></textarea>
+        </label>
+    </div>
+    <a href="#/blog" class="btn">Cancel</a>
+    <button ng-click="save()" class="btn btn-primary">Save</button>
+</form>

@@ -5,7 +5,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {templateUrl: 'partials/about.html', controller: 'AboutCtrl'});
         $routeProvider.when('/blog', {templateUrl: 'partials/blog.html', controller: 'BlogCtrl'});
-        $routeProvider.when('/blog/new', {templateUrl: 'partials/newPost.html', controller: 'NewPostCtrl'});
+        $routeProvider.when('/blog/new', {templateUrl: 'partials/newPost.html', controller: 'BlogCtrl'});
         $routeProvider.when('/contact', {templateUrl: 'partials/contact.html', controller: 'ContactCtrl'});
         $routeProvider.otherwise({redirectTo: '/'});
     }]);
