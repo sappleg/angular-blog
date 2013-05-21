@@ -2,10 +2,16 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
+angular.module('myApp.controllers', [])
+    .controller('AboutCtrl', [function() {
 
-  }])
-  .controller('MyCtrl2', [function() {
+    }])
+    .controller('BlogCtrl', [function() {
 
-  }]);
+    }])
+    .controller('NewPostCtrl', [function() {
+
+    }])
+    .controller('ContactCtrl', [function() {
+
+    }]);
