@@ -1,6 +1,7 @@
 'use strict';
 
-// Declare app level module which depends on filters, and services
+/* App level modules */
+
 angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'SpencerApplegateBlog.services', 'SpencerApplegateBlog.directives', 'SpencerApplegateBlog.controllers'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {templateUrl: 'partials/about.html', controller: 'AboutCtrl'});

@@ -2,8 +2,6 @@
 
 /* Services */
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('SpencerApplegateBlog.services', ['ngResource'])
     .factory('Post', ['$resource', function ($resource) {
         var Post = $resource('https://api.mongolab.com/api/1/databases' +
