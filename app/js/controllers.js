@@ -11,7 +11,7 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
     .controller('CreateCtrl', ['$scope', '$location', 'Post', function($scope, $location, Post) {
         $scope.save = function() {
-            Post.save($scope.post, function(post) {
+            Post.save($scope.post, function() {
                 $location.path('/blog');
             });
         };
