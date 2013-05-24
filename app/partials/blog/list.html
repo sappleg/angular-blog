@@ -7,6 +7,6 @@
         <h4>{{post.title}}</h4>
         <a href="#/blog/edit/{{post._id.$oid}}"><i class="icon-pencil"></i></a>
     </span>
-    <p>{{post.timestamp}}</p>
+    <p>{{post.timestamp | date:'fullDate'}}</p>
     <p>{{post.body}}</p>
 </div>
