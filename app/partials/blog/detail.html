@@ -1,6 +1,8 @@
+<!-- navigation -->
 <div ng-include src="'partials/nav.html'"></div>
 
 <form name="newPost">
+    <!-- contains fields and validation rules for the blog post title -->
     <div class="control-group" ng-class="{error: newPost.title.$invalid}">
         <label>Title
             <input type="text" name="title" ng-model="post.title" placeholder="Title..." required>
@@ -8,12 +10,15 @@
         <span ng-show="newPost.title.$error.required" class="help-inline">Required</span>
     </div>
 
+    <!-- contains fields and validation rules for the blog post body -->
     <div class="control-group" ng-class="{error: newPost.body.$invalid}">
         <label>Body
             <textarea name="body" ng-model="post.body" placeholder="Body..." required></textarea>
         </label>
         <span ng-show="newPost.body.$error.required" class="help-inline">Required</span>
     </div>
+
+    <!-- buttons at the bottom of a blog post detail page -->
     <a href="#/blog" class="btn">Cancel</a>
     <button ng-click="save()" ng-disabled="isClean() || newPost.$invalid" class="btn btn-primary">Save</button>
     <button ng-click="destroy()" ng-show="post._id" class="btn btn-danger">Delete</button>

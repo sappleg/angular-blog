@@ -29,6 +29,11 @@
   padding: 0;
 }
 
+/* blog styles */
 .post-title > h4 {
     display: inline;
+}
+
+.btn { /* overrides bootstrap's button style to add a bottom margin*/
+    margin-bottom: 20px;
 }
