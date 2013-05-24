@@ -3,7 +3,10 @@
 /* Controllers */
 
 angular.module('SpencerApplegateBlog.controllers', [])
-    .controller('AboutCtrl', [function() {
+    .controller('NavCtrl', ['$scope', '$route', function($scope, $route) {
+        $scope.$route = $route;
+    }])
+    .controller('AboutCtrl', ['$scope', function($scope) {
 
     }])
     .controller('BlogCtrl', ['$scope', 'Post', function($scope, Post) {
@@ -42,6 +45,6 @@ angular.module('SpencerApplegateBlog.controllers', [])
             });
         };
     }])
-    .controller('ContactCtrl', [function() {
+    .controller('ContactCtrl', ['$scope', function($scope) {
 
     }]);
