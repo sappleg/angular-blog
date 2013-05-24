@@ -7,6 +7,7 @@ angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'Spencer
         $routeProvider.when('/', {templateUrl: 'partials/about.html', controller: 'AboutCtrl'});
         $routeProvider.when('/blog', {templateUrl: 'partials/blog/list.html', controller: 'BlogCtrl'});
         $routeProvider.when('/blog/new/', {templateUrl: 'partials/blog/detail.html', controller: 'CreateCtrl'});
+        $routeProvider.when('/blog/edit/:postId', {templateUrl: 'partials/blog/detail.html', controller: 'EditCtrl'});
         $routeProvider.when('/contact', {templateUrl: 'partials/contact.html', controller: 'ContactCtrl'});
         $routeProvider.otherwise({redirectTo: '/'});
     }]);

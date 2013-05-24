@@ -1,15 +1,18 @@
-<form name="NewPost">
-    <div ng-class="{error: NewPost.name.$invalid}">
+<form name="newPost">
+    <div class="control-group" ng-class="{error: newPost.name.$invalid}">
         <label>Title
             <input type="text" name="title" ng-model="post.title" required>
         </label>
+        <span ng-show="newPost.name.$error.required" class="help-inline">Required</span>
     </div>
 
-    <div ng-class="{error: NewPost.name.$invalid}">
+    <div class="control-group" ng-class="{error: newPost.body.$invalid}">
         <label>Body
             <textarea name="body" ng-model="post.body" required></textarea>
         </label>
+        <span ng-show="newPost.body.$error.required" class="help-inline">Required</span>
     </div>
     <a href="#/blog" class="btn">Cancel</a>
-    <button ng-click="save()" class="btn btn-primary">Save</button>
+    <button ng-click="save()" ng-disabled="isClean() || newPost.$invalid" class="btn btn-primary">Save</button>
+    <button ng-click="destroy()" class="btn btn-danger">Delete</button>
 </form>
