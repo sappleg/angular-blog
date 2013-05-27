@@ -17,10 +17,15 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
 
     // blog page control
-    .controller('BlogCtrl', ['$scope', 'Post', function($scope, Post) {
+    .controller('BlogCtrl', ['$scope', '$location', '$routeParams', 'Post', function($scope, $location, $routeParams, Post) {
 
         // pulls all posts from the db to display on the /blog page
         $scope.posts = Post.query();
+
+        // redirects to viewing mode of blog post
+        $scope.view = function(id) {
+            $location.path('/blog/' + id );
+        };
     }])
 
     // create blog post page control
@@ -69,6 +74,15 @@ angular.module('SpencerApplegateBlog.controllers', [])
                 $location.path('/blog');
             });
         };
+    }])
+
+    // view post page control
+    .controller('ViewCtrl', ['$scope', '$routeParams', 'Post', function($scope, $routeParams, Post) {
+
+        Post.get({id: $routeParams.postId}, function(post) {
+            $scope.post = new Post(post);
+        });
+
     }])
 
     // contact page control

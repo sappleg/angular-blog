@@ -7,22 +7,32 @@ angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'Spencer
         $routeProvider.when('/', {
             templateUrl: 'partials/about.html',
             controller: 'AboutCtrl',
-            activeTab: 'about'});
+            activeTab: 'about'
+        });
         $routeProvider.when('/blog', {
             templateUrl: 'partials/blog/list.html',
             controller: 'BlogCtrl',
-            activeTab: 'blog'});
+            activeTab: 'blog'
+        });
         $routeProvider.when('/blog/new/', {
             templateUrl: 'partials/blog/detail.html',
             controller: 'CreateCtrl',
-            activeTab: 'blog'});
+            activeTab: 'blog'
+        });
+        $routeProvider.when('/blog/:postId', {
+            templateUrl: 'partials/blog/view.html',
+            controller: 'ViewCtrl',
+            activeTab: 'blog'
+        });
         $routeProvider.when('/blog/edit/:postId', {
             templateUrl: 'partials/blog/detail.html',
             controller: 'EditCtrl',
-            activeTab: 'blog'});
+            activeTab: 'blog'
+        });
         $routeProvider.when('/contact', {
             templateUrl: 'partials/contact.html',
             controller: 'ContactCtrl',
-            activeTab: 'contact'});
-        $routeProvider.otherwise({redirectTo: '/'});
+            activeTab: 'contact'
+        });
+//        $routeProvider.otherwise({redirectTo: '/'});
     }]);

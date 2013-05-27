@@ -1,0 +1,7 @@
+<!-- navigation -->
+<div ng-include src="'partials/nav.html'"></div>
+
+<!-- Show title, timestamp, and body -->
+<h4>{{post.title}}</h4>
+<p>{{post.datetime | date:'fullDate'}}</p>
+<p>{{post.body}}</p>
