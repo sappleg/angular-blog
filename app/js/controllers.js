@@ -45,12 +45,13 @@ angular.module('SpencerApplegateBlog.controllers', [])
             });
         };
     }])
+
+    // edit blog post control
     .controller('EditCtrl', ['$scope', '$routeParams', '$location', 'Post', function($scope, $routeParams, $location, Post) {
         // define local self variable
         var self = this;
 
         // grabs the correct post object based on id
-        // NOTE: NEED FURTHER EXPLANATION
         Post.get({id: $routeParams.postId}, function(post) {
             self.original = post;
             $scope.post = new Post(self.original);
@@ -77,12 +78,33 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
 
     // view post page control
-    .controller('ViewCtrl', ['$scope', '$routeParams', 'Post', function($scope, $routeParams, Post) {
+    .controller('ViewCtrl', ['$scope', '$routeParams', 'Post', 'Comment', function($scope, $routeParams, Post, Comment) {
+
+        $scope.comments = Comment.query();
 
         Post.get({id: $routeParams.postId}, function(post) {
             $scope.post = new Post(post);
         });
 
+    }])
+
+    // create blog post page control
+    .controller('CreateCommentCtrl', ['$scope', '$location', '$routeParams', 'Comment', function($scope, $location, $routeParams, Comment) {
+
+        // saves the newly created post
+        // NOTE: NEED FURTHER EXPLANATION
+        $scope.save = function() {
+
+            // adds a timestamp and post id to the created post object
+            $scope.comment.timestamp = new Date();
+            $scope.comment.postId = $routeParams.postId;
+
+            Comment.save($scope.comment, function() {
+
+                // relocate to the blog page after saving the post
+                $location.path('/blog');
+            });
+        };
     }])
 
     // contact page control

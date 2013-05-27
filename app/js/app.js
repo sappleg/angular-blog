@@ -24,6 +24,11 @@ angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'Spencer
             controller: 'ViewCtrl',
             activeTab: 'blog'
         });
+        $routeProvider.when('/blog/:postId/comments/new', {
+            templateUrl: 'partials/blog/comments/detail.html',
+            controller: 'CreateCommentCtrl',
+            activeTab: 'blog'
+        });
         $routeProvider.when('/blog/edit/:postId', {
             templateUrl: 'partials/blog/detail.html',
             controller: 'EditCtrl',
@@ -34,5 +39,5 @@ angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'Spencer
             controller: 'ContactCtrl',
             activeTab: 'contact'
         });
-//        $routeProvider.otherwise({redirectTo: '/'});
+        $routeProvider.otherwise({redirectTo: '/'});
     }]);

@@ -5,3 +5,12 @@
 <h4>{{post.title}}</h4>
 <p>{{post.datetime | date:'fullDate'}}</p>
 <p>{{post.body}}</p>
+
+<!-- new blog post button -->
+<a href="#/blog/{{post._id.$oid}}/comments/new" class="btn">New Comment</a>
+
+<!-- lists blog posts from newest to oldest -->
+<div ng-repeat="comment in comments | reverse">
+    <p>{{comment.timestamp | date:'fullDate'}}</p>
+    <p>{{comment.body}}</p>
+</div>
