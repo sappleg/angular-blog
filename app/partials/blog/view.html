@@ -9,8 +9,10 @@
 <!-- new blog post button -->
 <a href="#/blog/{{post._id.$oid}}/comments/new" class="btn">New Comment</a>
 
-<!-- lists blog posts from newest to oldest -->
-<div ng-repeat="comment in comments | reverse">
-    <p>{{comment.timestamp | date:'fullDate'}}</p>
-    <p>{{comment.body}}</p>
+<!-- lists comments from newest to oldest -->
+<div ng-repeat="comment in comments | reverse | comment:post._id.$oid">
+    <!--<div ng-show="{{comment.postId}} == {{post._id.$oid}}">-->
+        <p>{{comment.timestamp | date:'fullDate'}}</p>
+        <p>{{comment.body}}</p>
+    <!--</div>-->
 </div>

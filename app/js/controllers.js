@@ -102,7 +102,7 @@ angular.module('SpencerApplegateBlog.controllers', [])
             Comment.save($scope.comment, function() {
 
                 // relocate to the blog page after saving the post
-                $location.path('/blog');
+                $location.path('/blog/' + $routeParams.postId);
             });
         };
     }])
