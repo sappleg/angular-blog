@@ -2,11 +2,12 @@
 
 /* App level modules */
 
-angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'SpencerApplegateBlog.services', 'SpencerApplegateBlog.directives', 'SpencerApplegateBlog.controllers'])
+//angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'SpencerApplegateBlog.services', 'SpencerApplegateBlog.directives', 'SpencerApplegateBlog.controllers'])
+angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.services', 'SpencerApplegateBlog.controllers', 'SpencerApplegateBlog.mockBackend'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'partials/about.html',
-            controller: 'AboutCtrl',
+//            controller: 'AboutCtrl',
             activeTab: 'about'
         });
         $routeProvider.when('/blog', {
@@ -14,21 +15,21 @@ angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'Spencer
             controller: 'BlogCtrl',
             activeTab: 'blog'
         });
-        $routeProvider.when('/blog/new/', {
-            templateUrl: 'partials/blog/detail.html',
-            controller: 'CreateCtrl',
-            activeTab: 'blog'
-        });
-        $routeProvider.when('/blog/:postId', {
-            templateUrl: 'partials/blog/view.html',
-            controller: 'ViewCtrl',
-            activeTab: 'blog'
-        });
-        $routeProvider.when('/blog/:postId/comments/new', {
-            templateUrl: 'partials/blog/comments/detail.html',
-            controller: 'CreateCommentCtrl',
-            activeTab: 'blog'
-        });
+//        $routeProvider.when('/blog/new/', {
+//            templateUrl: 'partials/blog/detail.html',
+//            controller: 'CreateCtrl',
+//            activeTab: 'blog'
+//        });
+//        $routeProvider.when('/blog/:postId', {
+//            templateUrl: 'partials/blog/view.html',
+//            controller: 'ViewCtrl',
+//            activeTab: 'blog'
+//        });
+//        $routeProvider.when('/blog/:postId/comments/new', {
+//            templateUrl: 'partials/blog/comments/detail.html',
+//            controller: 'CreateCommentCtrl',
+//            activeTab: 'blog'
+//        });
         $routeProvider.when('/blog/edit/:postId', {
             templateUrl: 'partials/blog/detail.html',
             controller: 'EditCtrl',
@@ -36,7 +37,7 @@ angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.filters', 'Spencer
         });
         $routeProvider.when('/contact', {
             templateUrl: 'partials/contact.html',
-            controller: 'ContactCtrl',
+//            controller: 'ContactCtrl',
             activeTab: 'contact'
         });
         $routeProvider.otherwise({redirectTo: '/'});

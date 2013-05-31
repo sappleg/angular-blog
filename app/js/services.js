@@ -5,7 +5,7 @@
 angular.module('SpencerApplegateBlog.services', ['ngResource'])
 
     // creates Post objects to persist with MongoLab
-    .factory('Post', ['$resource', function ($resource) {
+    .factory('PostMongoLab', ['$resource', function ($resource) {
         // define post object attributes
         var Post = $resource('https://api.mongolab.com/api/1/databases' +
             '/spencerapplegate_blog/collections/posts/:id',
@@ -48,6 +48,45 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         };
 
         return Comment;
+    }])
+
+    .factory('Post', ['$http', '$routeParams', function($http, $routeParams) {
+        // Find out why prototyping is not working here
+        var Post = {
+            query: function() {
+                return $http.get('/posts').then(function(response) {
+//                    console.log(response);
+                    return response.data;
+                });
+            },
+
+            getPost: function(id) {
+                return $http.get('/posts/' + id).then(function(response) {
+                    console.log(response);
+                    return response.data;
+                });
+            },
+
+            update: function() {
+                return $http.put('/posts/' + $routeParams.postId, this).then(function(response) {
+//                    console.log(response);
+                    return response.data;
+                });
+            }
+        };
+
+//        Post.prototype.update = function() {
+//            return $http.put('/posts/' + $routeParams.postId, this).then(function(response) {
+//                console.log(response);
+//                return response.data;
+//            });
+//        };
+
+//        Post.prototype.destroy = function(cb) {
+//            return Post.remove({id: this.id}, cb);
+//        };
+
+        return Post;
     }])
 
     // current version of the application
