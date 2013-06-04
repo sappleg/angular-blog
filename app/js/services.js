@@ -50,41 +50,18 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         return Comment;
     }])
 
-    .factory('Post', ['$http', '$routeParams', function($http, $routeParams) {
-        // Find out why prototyping is not working here
-        var Post = {
-            query: function() {
-                return $http.get('/posts').then(function(response) {
-//                    console.log(response);
-                    return response.data;
-                });
-            },
+    .factory('Post', ['$resource', '$q', function($resource, $q) {
+        var url = '/posts';
 
-            getPost: function(id) {
-                return $http.get('/posts/' + id).then(function(response) {
-                    console.log(response);
-                    return response.data;
-                });
-            },
+        var Post = $resource(url + '/:id', {id: '@id'}, {update: {method:'PUT'}, query: {method:'GET', isArray:false}});
 
-            update: function() {
-                return $http.put('/posts/' + $routeParams.postId, this).then(function(response) {
-//                    console.log(response);
-                    return response.data;
-                });
-            }
+        Post.prototype.update = function(cb) {
+            return Post.update({id: this.id}, this, cb);
         };
 
-//        Post.prototype.update = function() {
-//            return $http.put('/posts/' + $routeParams.postId, this).then(function(response) {
-//                console.log(response);
-//                return response.data;
-//            });
-//        };
-
-//        Post.prototype.destroy = function(cb) {
-//            return Post.remove({id: this.id}, cb);
-//        };
+        Post.prototype.destroy = function(cb) {
+            return Post.remove({id: this.id}, cb);
+        };
 
         return Post;
     }])
