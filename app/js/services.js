@@ -5,7 +5,7 @@
 angular.module('SpencerApplegateBlog.services', ['ngResource'])
 
     // creates Post objects to persist with MongoLab
-    .factory('Post', ['$resource', function ($resource) {
+    .factory('PostMongoLab', ['$resource', function ($resource) {
         // define post object attributes
         var Post = $resource('https://api.mongolab.com/api/1/databases' +
             '/spencerapplegate_blog/collections/posts/:id',
@@ -28,7 +28,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
     }])
 
     // creates Comments objects to persist with MongoLab
-    .factory('Comment', ['$resource', function ($resource) {
+    .factory('CommentMongoLab', ['$resource', function ($resource) {
         // define comment object attributes
         var Comment = $resource('https://api.mongolab.com/api/1/databases' +
             '/spencerapplegate_blog/collections/comments/:id',
@@ -46,6 +46,27 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         Comment.prototype.destroy = function(cb) {
             return Comment.remove({id: this._id.$oid}, cb);
         };
+
+        return Comment;
+    }])
+
+    .factory('Post', ['$resource', '$q', function($resource, $q) {
+        var url = '/posts';
+
+        var Post = $resource(url + '/:id', {id: '@id'}, {update: {method:'PUT'}, query: {method:'GET', isArray:false}});
+
+        Post.prototype.update = function(cb) {
+            return Post.update({id: this.id}, this, cb);
+        };
+
+        Post.prototype.destroy = function(cb) {
+            return Post.remove({id: this.id}, cb);
+        };
+
+        return Post;
+    }])
+
+    .factory('Comment', ['$resource', function($resource) {
 
         return Comment;
     }])

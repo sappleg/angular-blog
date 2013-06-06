@@ -32,8 +32,38 @@
 /* blog styles */
 .post-title {
     display: inline;
+    cursor: pointer;
 }
 
 .btn { /* overrides bootstrap's button style to add a bottom margin*/
     margin-bottom: 20px;
+}
+
+.post-timestamp {
+    font-size: 8px;
+}
+
+#header {
+    background-image: url('../img/cover.jpg');
+}
+
+#header h2 a {
+    color: white;
+}
+
+#header h2 a:hover {
+    color: rgba(182, 180, 180, 0.74);
+    text-decoration: none;
+}
+
+.name {
+    display: inline-block;
+}
+
+.profile-pic {
+    margin: 20px 20px 20px 20px;
+}
+
+.post-body {
+    margin: 20px 20px 20px 20px;
 }
