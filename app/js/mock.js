@@ -4,8 +4,41 @@
 
 angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
     .run(['$httpBackend', function($httpBackend) {
-        var posts = {"51ac0423g1m8dt105i321c9m":{"id":"51ac0423g1m8dt105i321c9m", "title":"Title of mock post", "body":"Body of mock post"},
-                     "51ac0419bw2hw6goj3s3g3uh":{"id":"51ac0419bw2hw6goj3s3g3uh", "title":"Title of mock post 2", "body":"Body of mock post 2"}};
+
+        var posts = {
+            "51ac0423g1m8dt105i321c9m": {
+                "title":"First blog post",
+                "text":"This is the body of my first blog post",
+                "comments": {},
+                "tags": [],
+                "email": null,
+                "version": 1,
+                "_links": {
+                    "relative": {
+                        "api": "/51a7af2453d4c95a951cf9de/",
+                        "document": "51a7af2453d4c95a951cf9de/"
+                    },
+                    "absolute": "http://dev.maasive.net/SuperSpock/spencer/posts/51a7af2453d4c95a951cf9de/"
+                },
+                "id":"51ac0423g1m8dt105i321c9m"
+            },
+            "51b10f92bprgrnyrjcrtmki5": {
+                "title":"First blog post",
+                "text":"This is the body of my first blog post",
+                "comments": {},
+                "tags": [],
+                "email": null,
+                "version": 1,
+                "_links": {
+                    "relative": {
+                        "api": "/51b10f92bprgrnyrjcrtmki5/",
+                        "document": "51b10f92bprgrnyrjcrtmki5/"
+                    },
+                    "absolute": "http://dev.maasive.net/SuperSpock/spencer/posts/51b10f92bprgrnyrjcrtmki5/"
+                },
+                "id":"51b10f92bprgrnyrjcrtmki5"
+            }
+        };
 
         function idGenerator() {
             var length = 16;
@@ -34,8 +67,6 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
 
             var id = parts[1];
             return[200, posts[id]];
-
-//            return[400, 'NOT-FOUND'];
         });
 
         $httpBackend.whenPUT(/\/posts(\/[0-9a-z]{24})/).respond(function(method, url, data, headers) {
@@ -64,5 +95,4 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
         });
 
         $httpBackend.whenGET(/^partials\//).passThrough();
-
     }]);

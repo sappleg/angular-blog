@@ -1,41 +1,20 @@
-var post = {
-    "_prototype": {
-        "body": "StringField",
-        "title": "StringField"
-    },
-    "_timestamp": 1369968457.667631,
-    "resources": {
-        "51a80f4353d4c904b1d71a89": {
-            "body": "I'm sure I'll think of something good to say soon!",
-            "links": {
-                "relative": {
-                    "api": "/posts/51a80f4353d4c904b1d71a89",
-                    "document": "51a80f4353d4c904b1d71a89"
-                },
-                "absolute": "http://dev.maasive.net/SuperSpock/spencer/posts/51a80f4353d4c904b1d71a89"
-            },
-            "tags": [],
-            "title": "My Second Blog Post",
-            "version": 1,
-            "id": "51a80f4353d4c904b1d71a89"
-        },
-        "51a7af2453d4c95a951cf9de": {
-            "body": "I'm sure I'll think of something good to say soon!",
-            "links": {
-                "relative": {
-                    "api": "/posts/51a7af2453d4c95a951cf9de",
-                    "document": "51a7af2453d4c95a951cf9de"
-                },
-                "absolute": "http://dev.maasive.net/SuperSpock/spencer/posts/51a7af2453d4c95a951cf9de"
-            },
-            "tags": [],
-            "title": "My First Blog Post",
-            "version": 1,
-            "id": "51a7af2453d4c95a951cf9de"
-        }
-    }
+var table = {
+    7: {parent_id: 2, id: 7, children: {}},
+    10: {parent_id: 3, id: 10, children: {}},
+    1: {parent_id: 0, id: 1, children: {}},
+    4: {parent_id: 1, id: 4, children: {}},
+    5: {parent_id: 1, id: 5, children: {}},
+    6: {parent_id: 1, id: 6, children: {}},
+    2: {parent_id: 0, id: 2, children: {}},
+    8: {parent_id: 7, id: 8, children: {}},
+    9: {parent_id: 8, id: 9, children: {}},
+    3: {parent_id: 0, id: 3, children: {}}
 };
 
-var id = "51a80f4353d4c904b1d71a89";
+var root = {parent_id: null, id: 0, children: {}};
+var node_list = {0: root};
 
-//console.log(post["resources"]["51a80f4353d4c904b1d71a89"]);
+_.each(table, function(value, key) {
+    node_list[value.id] = value;
+    node_list[value.parent_id].children[key] = node_list[value.id];
+});

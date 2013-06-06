@@ -16,16 +16,9 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
 
     // blog page control
-    .controller('BlogCtrl', ['$scope', '$location', '$routeParams', 'Post', function($scope, $location, $routeParams, Post) {
-        // pulls all posts from the db to display on the /blog page
-        // TODO: abstract away the timestamp calculation from MongoId
-        $scope.posts = Post.query(function() {
-            $scope.posts = _.map($scope.posts, function(value, key, list) {
-                var timestamp = value.id.toString().substring(0,8);
-                value["timestamp"] = new Date(parseInt(timestamp, 16) * 1000);
-                return value;
-            });
-        });
+    .controller('BlogCtrl', ['$scope', '$location', 'load', function($scope, $location, load) {
+        // sets posts on scope as return from promise object in routeProvider's resolve
+        $scope.posts = load;
 
         // redirects to viewing mode of blog post
         $scope.view = function(id) {
@@ -35,11 +28,8 @@ angular.module('SpencerApplegateBlog.controllers', [])
 
     // create blog post page control
     .controller('CreateCtrl', ['$scope', '$http', '$location', 'Post', function($scope, $http, $location, Post) {
-
         // saves the newly created post
         $scope.save = function() {
-//            $scope.post.timestamp = Date.now();
-
             Post.save($scope.post, function() {
                 $location.path('/blog');
             });
@@ -57,6 +47,7 @@ angular.module('SpencerApplegateBlog.controllers', [])
             $scope.post = new Post(self.original);
         });
 
+        // save edited blog post
         $scope.save = function() {
             $scope.post.update(function() {
                 $location.path('/blog');
@@ -74,18 +65,15 @@ angular.module('SpencerApplegateBlog.controllers', [])
                 $location.path('/blog');
             })
         };
-
     }])
 
     // view post page control
     .controller('ViewCtrl', ['$scope', '$routeParams', 'Post', 'Comment', function($scope, $routeParams, Post, Comment) {
-
 //        $scope.comments = Comment.query();
 
         Post.get({id: $routeParams.id}, function(post) {
-//            $scope.post = new Post(post);
+            $scope.post = post;
         });
-
     }])
 //
 //    // create blog post page control

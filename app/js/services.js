@@ -28,7 +28,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
     }])
 
     // creates Comments objects to persist with MongoLab
-    .factory('Comment', ['$resource', function ($resource) {
+    .factory('CommentMongoLab', ['$resource', function ($resource) {
         // define comment object attributes
         var Comment = $resource('https://api.mongolab.com/api/1/databases' +
             '/spencerapplegate_blog/collections/comments/:id',
@@ -64,6 +64,11 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         };
 
         return Post;
+    }])
+
+    .factory('Comment', ['$resource', function($resource) {
+
+        return Comment;
     }])
 
     // current version of the application
