@@ -1,0 +1,19 @@
+<!-- navigation -->
+<div ng-include src="'partials/nav.html'"></div>
+
+<!-- Show title, timestamp, and body -->
+<h4>{{post.title}}</h4>
+<p>{{post.datetime | date:'fullDate'}}</p>
+<p>{{post.text}}</p>
+
+<!-- new blog post button -->
+<a href="#/blog/{{post.id}}/comments/new" class="btn">New Comment</a>
+
+<!-- lists comments from newest to oldest -->
+<!--<div ng-repeat="comment in comments | reverse | comment:post._id.$oid">-->
+<!--<div ng-repeat="comment in comments">-->
+    <!--<div ng-show="{{comment.postId}} == {{post._id.$oid}}">-->
+        <!--<p>{{comment.timestamp | date:'fullDate'}}</p>-->
+        <!--<p>{{comment.body}}</p>-->
+    <!--</div>-->
+<!--</div>-->
