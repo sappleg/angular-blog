@@ -50,10 +50,17 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         return Comment;
     }])
 
-    .factory('Post', ['$resource', '$q', function($resource, $q) {
+    .factory('Post', ['$resource', function($resource) {
         var url = '/posts';
 
-        var Post = $resource(url + '/:id', {id: '@id'}, {update: {method:'PUT'}, query: {method:'GET', isArray:false}});
+        var Post = $resource(url + '/:id',
+            { id: '@id'},
+            { update: { method: 'PUT' },
+                query: {
+                    method: 'GET',
+                    isArray: false
+                }
+            });
 
         Post.prototype.update = function(cb) {
             return Post.update({id: this.id}, this, cb);
