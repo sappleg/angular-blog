@@ -73,6 +73,8 @@ angular.module('SpencerApplegateBlog.controllers', [])
 
         Post.get({id: $routeParams.id}, function(post) {
             $scope.post = post;
+//            console.log(post);
+            
         });
     }])
 //

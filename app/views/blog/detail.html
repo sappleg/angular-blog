@@ -11,9 +11,9 @@
     </div>
 
     <!-- contains fields and validation rules for the blog post body -->
-    <div class="control-group" ng-class="{error: newPost.body.$invalid}">
+    <div class="control-group" ng-class="{error: newPost.text.$invalid}">
         <label>Body
-            <textarea name="body" ng-model="post.body" placeholder="Body..." required></textarea>
+            <textarea name="text" ng-model="post.text" placeholder="Body..." required></textarea>
         </label>
         <span ng-show="newPost.body.$error.required" class="help-inline">Required</span>
     </div>

@@ -5,65 +5,60 @@
 angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
     .run(['$httpBackend', function($httpBackend) {
 
-        var posts = {
-            "51ac0423g1m8dt105i321c9m": {
-                "tags": [],
-                "text":"This is the body of my first blog post",
-                "title":"First blog post",
-                "comments": {
-                    "tags": [],
-                    "ids": null,
-                    "collection": "comments",
-                    "version": 0,
-                    "query": "?post_id=51ac0423g1m8dt105i321c9m",
-                    "id": "51ac0423g1m8dt105i321c9m"
-                },
-                "email": "spencer.applegate3@gmail.com",
-                "version": 1,
-                "_links": {
-                    "relative": {
-                        "api": "/51ac0423g1m8dt105i321c9m/",
-                        "document": "51ac0423g1m8dt105i321c9m/"
-                    },
-                    "absolute": "http://dev.maasive.net/SuperSpock/spencer/posts/51a7af2453d4c95a951cf9de/"
-                },
-                "id":"51ac0423g1m8dt105i321c9m"
-            }
+        var Post = function(id, comments_id, title, text) {
+            this.tags = [];
+            this.text = text;
+            this.title = title;
+            this.comments = {};
+            this.comments.tags = [];
+            this.comments.ids = null;
+            this.comments.collection = "comments";
+            this.comments.version = 0;
+            this.comments.query = "?post_id=" + id;
+            this.comments.id = comments_id; // this id will correspond to a dictionary of comments for this post
+            this.email = "spencer.applegate3@gmail.com";
+            this.version = 1;
+            this._links = {};
+            this._links.relative = {};
+            this._links.absolute = {};
+            this._links.relative.api = "/" + id + "/";
+            this._links.relative.document = id + "/";
+            this._links.absolute = "http://dev.maasive.net/SuperSpock/spencer/posts/" + id + "/";
+            this.id = id;
+            this.timestamp = Date.now();
         };
 
-        var comments = {
-            "51b20d0453d4c9058a431525": {
-                "tags": [],
-                "text": "This is a root comment",
-                "email": "josh@maasive.net",
-                "version": 1,
-                "_links": {
-                    "relative": {
-                        "api": "/51b20d0453d4c9058a431525/",
-                        "document": "51b20d0453d4c9058a431525/"
-                    },
-                    "absolute": "http://SuperSpock/SuperSpock/spencer/comments/51b20d0453d4c9058a431525/"
-                },
-                "parentId": "",
-                "postId": "51ac0423g1m8dt105i321c9m",
-                "id": "51b20d0453d4c9058a431525"
-            },
-            "51b4e09653d4c9058a503e82": {
-                "tags": [],
-                "text": "This comment is a child of 51b20d0453d4c9058a431525",
-                "email": "josh@maasive.net",
-                "version": 1,
-                "_links": {
-                    "relative": {
-                        "api": "/51b4e09653d4c9058a503e82/",
-                        "document": "51b4e09653d4c9058a503e82/"
-                    },
-                    "absolute": "http://SuperSpock/SuperSpock/spencer/comments/51b4e09653d4c9058a503e82/"
-                },
-                "parentId": "51b20d0453d4c9058a431525",
-                "postId": "51ac0423g1m8dt105i321c9m",
-                "id": "51b4e09653d4c9058a503e82"
-            }
+        var Comment = function(id, parentId, postId, email, text) {
+            this.tags = [];
+            this.text = text;
+            this.email = email;
+            this.version = 1;
+            this._links = {};
+            this._links.relative = {};
+            this._links.absolute = {};
+            this._links.relative.api = "/" + id + "/";
+            this._links.relative.document = id + "/";
+            this._links.absolute = "http://dev.maasive.net/SuperSpock/spencer/comments/" + id + "/";
+            this.parentId = parentId;
+            this.postId = postId;
+            this.id = id;
+            this.timestamp = Date.now();
+        };
+
+        var posts = {}; // initialize posts object
+        var id_tmp = idGenerator(); // create id for first post
+        var com_id_tmp = idGenerator(); // create id for comments collection
+        posts[id_tmp] = new Post(id_tmp, com_id_tmp, "This is a title", "This is a body");
+
+        var comments = {};
+        var com_id_tmp_1 = idGenerator();
+        var com_id_tmp_2 = idGenerator();
+        comments[com_id_tmp] = {};
+        comments[com_id_tmp][com_id_tmp_1] = new Comment(com_id_tmp_1, "", id_tmp, "spencer.applegate3@gmail.com", "whatt?");
+        comments[com_id_tmp][com_id_tmp_2] = new Comment(com_id_tmp_2, "", id_tmp, "spencer.applegate3@gmail.com", "whatt, 2?");
+
+        Post.prototype.getComments = function(id) {
+            return comments[id];
         };
 
         function idGenerator() {
@@ -81,36 +76,36 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
             return id + result;
         }
 
-        function compileComments() {
-
-        }
-
         $httpBackend.whenGET('/posts').respond(function(method, url, data, headers) {
             return[200, posts];
         });
 
         $httpBackend.whenGET(/\/posts(\/[0-9a-z]{24})/).respond(function(method, url, data, headers) {
             var parts = url.replace('/posts', '').split('/');
-            if (parts.length != 2) {
-                return [200, posts.slice()];
-            }
 
             var id = parts[1];
-            return[200, posts[id]];
+            var post = posts[id];
+            post.comments = post.getComments(post.comments.id);
+            console.log(post);
+
+
+            return[200, {}];
         });
 
         $httpBackend.whenPUT(/\/posts(\/[0-9a-z]{24})/).respond(function(method, url, data, headers) {
             var parts = url.replace('/posts', '').split('/');
             var id = parts[1];
 
-            posts[id] = angular.fromJson(data);
-            return [200, posts[index], {}];
+//            posts[id] = angular.fromJson(data);
+//            console.log(posts[id]);
+
+            return [200, {}, {}];
         });
 
         $httpBackend.whenPOST('/posts').respond(function(method, url, data, headers) {
-            var post = angular.fromJson(data);
-            post.id = idGenerator();
-            post.timestamp = Date.now();
+            var data_transformed = angular.fromJson(data);
+
+            var post = new Post(idGenerator(), idGenerator(), data_transformed.title, data_transformed.text);
 
             posts[post.id] = post;
             return [200, {}, {}];
