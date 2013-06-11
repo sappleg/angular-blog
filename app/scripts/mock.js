@@ -34,7 +34,7 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
         var comments = {
             "51b20d0453d4c9058a431525": {
                 "tags": [],
-                "text": "This is a random comment",
+                "text": "This is a root comment",
                 "email": "josh@maasive.net",
                 "version": 1,
                 "_links": {
@@ -44,13 +44,13 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
                     },
                     "absolute": "http://SuperSpock/SuperSpock/spencer/comments/51b20d0453d4c9058a431525/"
                 },
-                "parentId": "51b20ce953d4c9058a431524",
-                "postId": "51b20c4e53d4c9058a431521",
+                "parentId": "",
+                "postId": "51ac0423g1m8dt105i321c9m",
                 "id": "51b20d0453d4c9058a431525"
             },
             "51b4e09653d4c9058a503e82": {
                 "tags": [],
-                "text": "This comment is attached to post 51b20c4e53d4c9058a431521, but not a reply to any other comment",
+                "text": "This comment is a child of 51b20d0453d4c9058a431525",
                 "email": "josh@maasive.net",
                 "version": 1,
                 "_links": {
@@ -60,8 +60,8 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
                     },
                     "absolute": "http://SuperSpock/SuperSpock/spencer/comments/51b4e09653d4c9058a503e82/"
                 },
-                "parentId": "",
-                "postId": "51b20c4e53d4c9058a431521",
+                "parentId": "51b20d0453d4c9058a431525",
+                "postId": "51ac0423g1m8dt105i321c9m",
                 "id": "51b4e09653d4c9058a503e82"
             }
         };
