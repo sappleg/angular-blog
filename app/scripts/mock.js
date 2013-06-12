@@ -9,13 +9,7 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
             this.tags = [];
             this.text = text;
             this.title = title;
-            this.comments = {};
-            this.comments.tags = [];
-            this.comments.ids = null;
-            this.comments.collection = "comments";
-            this.comments.version = 0;
-            this.comments.query = "?post_id=" + id;
-            this.comments.id = comments_id; // this id will correspond to a dictionary of comments for this post
+            this.commentId = comments_id;
             this.email = "spencer.applegate3@gmail.com";
             this.version = 1;
             this._links = {};
@@ -45,21 +39,18 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
             this.timestamp = Date.now();
         };
 
+        // initialize objects for mockBackend use
         var posts = {}; // initialize posts object
-        var id_tmp = idGenerator(); // create id for first post
-        var com_id_tmp = idGenerator(); // create id for comments collection
+        var id_tmp = "51b7b443wmsciv3sgifciqo2"; // create id for first post
+        var com_id_tmp = "51b7b4bc8lycn8qgcib4aa39"; // create id for comments collection
         posts[id_tmp] = new Post(id_tmp, com_id_tmp, "This is a title", "This is a body");
 
         var comments = {};
-        var com_id_tmp_1 = idGenerator();
-        var com_id_tmp_2 = idGenerator();
+        var com_id_tmp_1 = "51b7b4bc8lycn8qgcib4bb49";
+        var com_id_tmp_2 = "51b7b4bc8lycn8qgcib4cc5x";
         comments[com_id_tmp] = {};
         comments[com_id_tmp][com_id_tmp_1] = new Comment(com_id_tmp_1, "", id_tmp, "spencer.applegate3@gmail.com", "whatt?");
         comments[com_id_tmp][com_id_tmp_2] = new Comment(com_id_tmp_2, "", id_tmp, "spencer.applegate3@gmail.com", "whatt, 2?");
-
-        Post.prototype.getComments = function(id) {
-            return comments[id];
-        };
 
         function idGenerator() {
             var length = 16;
@@ -85,19 +76,16 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
 
             var id = parts[1];
             var post = posts[id];
-            post.comments = post.getComments(post.comments.id);
-            console.log(post);
+            var comId = post.commentId;
+            post.comments = comments[comId];
 
-
-            return[200, {}];
+            return[200, post];
         });
 
         $httpBackend.whenPUT(/\/posts(\/[0-9a-z]{24})/).respond(function(method, url, data, headers) {
             var parts = url.replace('/posts', '').split('/');
             var id = parts[1];
-
-//            posts[id] = angular.fromJson(data);
-//            console.log(posts[id]);
+            posts[id] = angular.fromJson(data);
 
             return [200, {}, {}];
         });

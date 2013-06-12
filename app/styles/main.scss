@@ -1,17 +1,7 @@
 @import "compass_twitter_bootstrap";
 
-/* blog styles */
-.post-title {
-    display: inline;
-    cursor: pointer;
-}
-
-.btn { /* overrides bootstrap's button style to add a bottom margin*/
-    margin-bottom: 20px;
-}
-
-.post-timestamp {
-    font-size: 8px;
+.name {
+    display: inline-block;
 }
 
 #header {
@@ -27,8 +17,12 @@
     text-decoration: none;
 }
 
-.name {
-    display: inline-block;
+.btn { /* overrides bootstrap's button style to add a bottom margin*/
+    margin-bottom: 20px;
+}
+
+.post-timestamp {
+    font-size: 8px;
 }
 
 .profile-pic {
@@ -36,6 +30,8 @@
 }
 
 .post-title {
+    display: inline;
+    cursor: pointer;
     margin: 0px 0px 0px 20px;
 }
 
