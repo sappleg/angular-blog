@@ -7,7 +7,9 @@
 <!-- lists blog posts from newest to oldest -->
 <div ng-repeat="post in posts | reverse" class="post">
     <h4 ng-click="view(post.id)" class="post-title">{{post.title}}</h4>
-    <a href="#/blog/edit/{{post.id}}"><i class="icon-pencil"></i></a>
+    <!-- TODO: reincorporate glyphicons once they build correctly -->
+    <a href="#/blog/edit/{{post.id}}" class="btn btn-primary">Edit</i></a>
+    <!--<a href="#/blog/edit/{{post.id}}"><i class="icon-pencil"></i></a>-->
     <div class="post-body well">
         <p>{{post.text}}</p>
         <p class="post-timestamp">Posted on: {{post.timestamp | date:'fullDate'}}</p>
