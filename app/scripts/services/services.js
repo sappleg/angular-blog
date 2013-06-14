@@ -3,79 +3,79 @@
 /* Services */
 
 angular.module('SpencerApplegateBlog.services', ['ngResource'])
-
-    // creates Post objects to persist with MongoLab
-    .factory('PostMongoLab', ['$resource', function ($resource) {
-        // define post object attributes
-        var Post = $resource('https://api.mongolab.com/api/1/databases' +
-            '/spencerapplegate_blog/collections/posts/:id',
-            { apiKey: '6Y4sT7bQvkiqJUKTkAsbDY-P8l4sPtaH' },
-            { update: { method: 'PUT' } }
-        );
-
-        // method to update blog posts in the db
-        Post.prototype.update = function(cb) {
-            return Post.update({id: this._id.$oid},
-                angular.extend({}, this, {_id:undefined}), cb);
+    .factory('Post', ['$http', '$q', function($http, $q) {
+        var Post = function(data) {
+            angular.extend(this, {}, data);
         };
 
-        // method to delete blog posts in the db
-        Post.prototype.destroy = function(cb) {
-            return Post.remove({id: this._id.$oid}, cb);
+        Post.query = function() {
+            var deferred = $q.defer();
+
+            $http({method: 'GET', url: '/posts'})
+                .success(function(data) {
+                    data = _.map(data, function(value) {
+                        // TODO: abstract away the timestamp calculation from this controller to make more reusable
+                        var timestamp = value.id.toString().substring(0, 8);
+                        value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
+                        return value;
+                    });
+
+                    deferred.resolve(data);
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+
+            return deferred.promise;
+        };
+
+        Post.get = function(params) {
+            var deferred = $q.defer();
+
+            $http({method: 'GET', url: '/posts/' + params.id})
+                .success(function(data) {
+                    deferred.resolve(new Post(data));
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+
+            return deferred.promise;
+        };
+
+        Post.save = function(post, callback) {
+            $http({method: 'POST', url: '/posts', data: post})
+                .success(callback)
+                .error(function() {
+                    console.log('There was an error creating your post');
+                })
+        };
+
+        Post.update = function(params, post, callback) {
+            $http({method: 'PUT', url: '/posts/' + params.id, data: post})
+                .success(callback)
+                .error(function() {
+                    console.log('There was an error saving your post');
+                });
+        };
+
+        Post.remove = function(params, callback) {
+            $http({method: 'DELETE', url: '/posts/' + params.id})
+                .success(callback)
+                .error(function() {
+                    console.log('There was an error deleting your post');
+                });
+        };
+
+        Post.prototype.update = function(callback) {
+            return Post.update({id: this.id}, this, callback);
+        };
+
+        Post.prototype.destroy = function(callback) {
+            return Post.remove({id: this.id}, callback);
         };
 
         return Post;
-    }])
-
-    // creates Comments objects to persist with MongoLab
-    .factory('CommentMongoLab', ['$resource', function ($resource) {
-        // define comment object attributes
-        var Comment = $resource('https://api.mongolab.com/api/1/databases' +
-            '/spencerapplegate_blog/collections/comments/:id',
-            { apiKey: '6Y4sT7bQvkiqJUKTkAsbDY-P8l4sPtaH' },
-            { update: { method: 'PUT' } }
-        );
-
-        // method to update comments in the db
-        Comment.prototype.update = function(cb) {
-            return Comment.update({id: this._id.$oid},
-                angular.extend({}, this, {_id:undefined}), cb);
-        };
-
-        // method to delete comments in the db
-        Comment.prototype.destroy = function(cb) {
-            return Comment.remove({id: this._id.$oid}, cb);
-        };
-
-        return Comment;
-    }])
-
-    .factory('Post', ['$resource', function($resource) {
-        var url = '/posts';
-
-        var Post = $resource(url + '/:id',
-            { id: '@id'},
-            { update: { method: 'PUT' },
-                query: {
-                    method: 'GET',
-                    isArray: false
-                }
-            });
-
-        Post.prototype.update = function(cb) {
-            return Post.update({id: this.id}, this, cb);
-        };
-
-        Post.prototype.destroy = function(cb) {
-            return Post.remove({id: this.id}, cb);
-        };
-
-        return Post;
-    }])
-
-    .factory('Comment', ['$resource', function($resource) {
-
-        return Comment;
     }])
 
     // current version of the application

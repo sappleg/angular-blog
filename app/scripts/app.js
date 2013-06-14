@@ -15,21 +15,8 @@ angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.services', 'Spence
             controller: 'BlogCtrl',
             activeTab: 'blog',
             resolve: {
-                load: ['$q', 'Post', function($q, Post) {
-                    var defer = $q.defer();
-                    Post.query(function(successData) {
-                        successData = _.map(successData, function(value) {
-                            // TODO: abstract away the timestamp calculation from this controller to make more reusable
-                            var timestamp = value.id.toString().substring(0, 8);
-                            value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
-                            return value;
-                        });
-                        defer.resolve(successData);
-                    }, function() {
-                        defer.reject();
-                    });
-
-                    return defer.promise;
+                load: ['Post', function(Post) {
+                    return Post.query();
                 }]
             }
         });

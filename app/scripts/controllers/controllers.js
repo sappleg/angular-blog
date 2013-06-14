@@ -27,7 +27,7 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
 
     // create blog post page control
-    .controller('CreateCtrl', ['$scope', '$http', '$location', 'Post', function($scope, $http, $location, Post) {
+    .controller('CreateCtrl', ['$scope', '$location', 'Post', function($scope, $location, Post) {
         // saves the newly created post
         $scope.save = function() {
             Post.save($scope.post, function() {
@@ -37,26 +37,28 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
 
     // edit blog post control
-    .controller('EditCtrl', ['$scope', '$http', '$routeParams', '$location', 'Post', function($scope, $http, $routeParams, $location, Post) {
+    .controller('EditCtrl', ['$scope', '$routeParams', '$location', 'Post', function($scope, $routeParams, $location, Post) {
         // define local self variable
         var self = this;
 
         // grabs the correct post object based on id
-        Post.get({'id': $routeParams.id}, function(post) {
+        Post.get({id: $routeParams.id}).then(function(post) {
             self.original = post;
             $scope.post = new Post(self.original);
+            console.log(self.original);
+            console.log($scope.post);
         });
+
+        // checks to see if the post in the details page has been changed
+        $scope.isClean = function() {
+            return angular.equals(self.original, $scope.post);
+        };
 
         // save edited blog post
         $scope.save = function() {
             $scope.post.update(function() {
                 $location.path('/blog');
             });
-        };
-
-        // checks to see if the post in the details page has been changed
-        $scope.isClean = function() {
-            return angular.equals(self.original, $scope.post);
         };
 
         // deletes post object and redirects to main blog page
@@ -68,13 +70,10 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
 
     // view post page control
-    .controller('ViewCtrl', ['$scope', '$routeParams', 'Post', 'Comment', function($scope, $routeParams, Post, Comment) {
-//        $scope.comments = Comment.query();
-
-        Post.get({id: $routeParams.id}, function(post) {
+    .controller('ViewCtrl', ['$scope', '$routeParams', 'Post', function($scope, $routeParams, Post) {
+        // TODO: move this to a resolve service on routeProvider
+        Post.get({id: $routeParams.id}).then(function(post) {
             $scope.post = post;
-//            console.log(post);
-            
         });
     }])
 //
@@ -82,7 +81,6 @@ angular.module('SpencerApplegateBlog.controllers', [])
 //    .controller('CreateCommentCtrl', ['$scope', '$location', '$routeParams', 'Comment', function($scope, $location, $routeParams, Comment) {
 //
 //        // saves the newly created post
-//        // NOTE: NEED FURTHER EXPLANATION
 //        $scope.save = function() {
 //
 //            // adds a timestamp and post id to the created post object
