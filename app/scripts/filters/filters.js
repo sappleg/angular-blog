@@ -12,6 +12,7 @@ angular.module('SpencerApplegateBlog.filters', [])
     }])
 
     // reverses an array of items -- primarily used for blog posts and comments
+    // TODO: filter on timestamp instead of initial position
     .filter('reverse', [function() {
         return function(items) {
             return items.slice().reverse();

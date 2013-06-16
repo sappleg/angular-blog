@@ -42,15 +42,14 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
         // initialize objects for mockBackend use
         var posts = {}; // initialize posts object
         var id_tmp = "51b7b443wmsciv3sgifciqo2"; // create id for first post
-        var com_id_tmp = "51b7b4bc8lycn8qgcib4aa39"; // create id for comments collection
-        posts[id_tmp] = new Post(id_tmp, com_id_tmp, "This is a title", "This is a body");
+        posts[id_tmp] = new Post(id_tmp, id_tmp, "This is a title", "This is a body");
 
         var comments = {};
         var com_id_tmp_1 = "51b7b4bc8lycn8qgcib4bb49";
         var com_id_tmp_2 = "51b7b4bc8lycn8qgcib4cc5x";
-        comments[com_id_tmp] = {};
-        comments[com_id_tmp][com_id_tmp_1] = new Comment(com_id_tmp_1, "", id_tmp, "spencer.applegate3@gmail.com", "whatt?");
-        comments[com_id_tmp][com_id_tmp_2] = new Comment(com_id_tmp_2, "", id_tmp, "spencer.applegate3@gmail.com", "whatt, 2?");
+        comments[id_tmp] = {};
+        comments[id_tmp][com_id_tmp_1] = new Comment(com_id_tmp_1, "", id_tmp, "spencer.applegate3@gmail.com", "whatt?");
+        comments[id_tmp][com_id_tmp_2] = new Comment(com_id_tmp_2, "", id_tmp, "spencer.applegate3@gmail.com", "whatt, 2?");
 
         function idGenerator() {
             var length = 16;
@@ -65,6 +64,17 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
             }
 
             return id + result;
+        }
+
+        function deleteComment(id) {
+            for (var collection in comments) {
+                var obj = comments[collection];
+                for (var comment in obj) {
+                    if (obj.hasOwnProperty(comment) && comment == id) {
+                        delete obj[comment];
+                    }
+                }
+            }
         }
 
         $httpBackend.whenGET('/posts').respond(function(method, url, data, headers) {
@@ -104,6 +114,23 @@ angular.module('SpencerApplegateBlog.mockBackend', ['ngMockE2E'])
             var id = parts[1];
 
             delete posts[id];
+            return[200, {}, {}];
+        });
+
+        $httpBackend.whenPOST('/comments').respond(function(method, url, data, headers) {
+            var data_trans = angular.fromJson(data);
+
+            var comment = new Comment(idGenerator(), data_trans.parentId, data_trans.postId, data_trans.email, data_trans.text);
+
+            comments[comment.postId][comment.id] = comment;
+            return [200, {}, {}];
+        });
+
+        $httpBackend.whenDELETE(/\/comments(\/[0-9a-z]{24})/).respond(function(method, url, data, headers) {
+            var parts = url.replace('/comments', '').split('/');
+            var id = parts[1];
+
+            deleteComment(id);
             return[200, {}, {}];
         });
 

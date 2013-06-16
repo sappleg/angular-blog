@@ -45,8 +45,6 @@ angular.module('SpencerApplegateBlog.controllers', [])
         Post.get({id: $routeParams.id}).then(function(post) {
             self.original = post;
             $scope.post = new Post(self.original);
-            console.log(self.original);
-            console.log($scope.post);
         });
 
         // checks to see if the post in the details page has been changed
@@ -70,31 +68,39 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
 
     // view post page control
-    .controller('ViewCtrl', ['$scope', '$routeParams', 'Post', function($scope, $routeParams, Post) {
+    .controller('ViewCtrl', ['$scope', '$location', '$routeParams', 'load', 'Comment', 'Post', function($scope, $location, $routeParams, load, Comment, Post) {
         // TODO: move this to a resolve service on routeProvider
-        Post.get({id: $routeParams.id}).then(function(post) {
-            $scope.post = post;
-        });
+        $scope.post = load;
+
+        $scope.destroy = function(id) {
+            Comment.remove({id: id}, function() {
+                Post.get({id: $routeParams.id}).then(function(post) {
+                    $scope.post.comments = _.map(post.comments, function(value) {
+                        return value;
+                    });
+                });
+            });
+        };
     }])
 //
 //    // create blog post page control
-//    .controller('CreateCommentCtrl', ['$scope', '$location', '$routeParams', 'Comment', function($scope, $location, $routeParams, Comment) {
-//
-//        // saves the newly created post
-//        $scope.save = function() {
-//
-//            // adds a timestamp and post id to the created post object
-//            $scope.comment.timestamp = new Date();
-//            $scope.comment.postId = $routeParams.postId;
-//
-//            Comment.save($scope.comment, function() {
-//
-//                // relocate to the blog page after saving the post
-//                $location.path('/blog/' + $routeParams.postId);
-//            });
-//        };
-//    }])
-//
+    .controller('CreateCommentCtrl', ['$scope', '$location', '$routeParams', 'Comment', function($scope, $location, $routeParams, Comment) {
+
+        // saves the newly created post
+        $scope.save = function() {
+
+            // adds a timestamp and post id to the created post object
+            $scope.comment.timestamp = new Date();
+            $scope.comment.postId = $routeParams.postId;
+            $scope.comment.parentId = "";
+
+            Comment.save($scope.comment, function() {
+                // relocate to the blog page after saving the post
+                $location.path('/blog/' + $routeParams.postId);
+            });
+        };
+    }])
+
 //    // contact page control
     .controller('ContactCtrl', ['$scope', function($scope) {
 

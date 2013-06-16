@@ -3,7 +3,7 @@
 /* Services */
 
 angular.module('SpencerApplegateBlog.services', ['ngResource'])
-    .factory('Post', ['$http', '$q', function($http, $q) {
+    .factory('Post', ['$http', '$q', '_api', function($http, $q, _api) {
         var Post = function(data) {
             angular.extend(this, {}, data);
         };
@@ -11,7 +11,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         Post.query = function() {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: '/posts'})
+            $http({method: 'GET', url: _api+ '/posts'})
                 .success(function(data) {
                     data = _.map(data, function(value) {
                         // TODO: abstract away the timestamp calculation from this controller to make more reusable
@@ -32,7 +32,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         Post.get = function(params) {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: '/posts/' + params.id})
+            $http({method: 'GET', url: _api + '/posts/' + params.id})
                 .success(function(data) {
                     deferred.resolve(new Post(data));
                 })
@@ -44,7 +44,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         };
 
         Post.save = function(post, callback) {
-            $http({method: 'POST', url: '/posts', data: post})
+            $http({method: 'POST', url: _api + '/posts', data: post})
                 .success(callback)
                 .error(function() {
                     console.log('There was an error creating your post');
@@ -52,7 +52,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         };
 
         Post.update = function(params, post, callback) {
-            $http({method: 'PUT', url: '/posts/' + params.id, data: post})
+            $http({method: 'PUT', url: _api + '/posts/' + params.id, data: post})
                 .success(callback)
                 .error(function() {
                     console.log('There was an error saving your post');
@@ -60,7 +60,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         };
 
         Post.remove = function(params, callback) {
-            $http({method: 'DELETE', url: '/posts/' + params.id})
+            $http({method: 'DELETE', url: _api + '/posts/' + params.id})
                 .success(callback)
                 .error(function() {
                     console.log('There was an error deleting your post');
@@ -78,5 +78,34 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         return Post;
     }])
 
-    // current version of the application
-    .value('version', '0.1');
+    .factory('Comment', ['$http', '$q', '_api', function($http, $q, _api) {
+        var Comment = function(data) {
+            angular.extend(this, {}, data);
+        };
+
+        Comment.save = function(comment, callback) {
+            $http({method: 'POST', url: _api + '/comments', data: comment})
+                .success(callback)
+                .error(function() {
+                    console.log('There was an error saving the comment');
+                });
+        };
+
+        Comment.remove = function(params, callback) {
+            $http({method: 'DELETE', url: _api + '/comments/' + params.id})
+                .success(callback)
+                .error(function() {
+                    console.log('There was an error deleting the comment');
+                });
+        };
+
+        Comment.prototype.destroy = function(callback) {
+            return Comment.remove({id: this.id}, callback);
+        };
+
+        return Comment;
+    }])
+
+        // current version of the application
+    .value('version', '0.1')
+    .value('_api', '');
