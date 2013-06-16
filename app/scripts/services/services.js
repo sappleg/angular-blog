@@ -11,7 +11,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         Post.query = function() {
             var deferred = $q.defer();
 
-            $http({method: 'GET', url: _api+ '/posts'})
+            $http({method: 'GET', url: _api+ '/posts/'})
                 .success(function(data) {
                     data = _.map(data, function(value) {
                         // TODO: abstract away the timestamp calculation from this controller to make more reusable
@@ -108,4 +108,4 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
 
         // current version of the application
     .value('version', '0.1')
-    .value('_api', '');
+    .value('_api', 'http://dev.maasive.net/SuperSpock/spencer');
