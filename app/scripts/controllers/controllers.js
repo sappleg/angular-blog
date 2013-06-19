@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('SpencerApplegateBlog.controllers', [])
+angular.module('SpencerApplegateBlog.controllers', ['ngCookies'])
 
     // navigation control to keep track of active tab
     .controller('NavCtrl', ['$scope', '$route', function($scope, $route) {
@@ -11,8 +11,13 @@ angular.module('SpencerApplegateBlog.controllers', [])
     }])
 
     // about page control
-    .controller('AboutCtrl', ['$scope', function($scope) {
-
+    .controller('AboutCtrl', ['$scope', '$location', '$cookies', 'Login', function($scope, $location, $cookies, Login) {
+        $scope.logout = function() {
+//            console.log($cookies);
+            Login.logout(function() {
+                $location.path('/');
+            });
+        };
     }])
 
     // blog page control
@@ -104,4 +109,17 @@ angular.module('SpencerApplegateBlog.controllers', [])
 //    // contact page control
     .controller('ContactCtrl', ['$scope', function($scope) {
 
+    }])
+
+    .controller('LoginCtrl', ['$scope', '$location', 'Login', function($scope, $location, Login) {
+        $scope.save = function() {
+            var LoginData = {
+                "email": $scope.email,
+                "password": $scope.password
+            };
+
+            Login.login(LoginData, function() {
+                $location.path('/');
+            });
+        }
     }]);

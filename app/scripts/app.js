@@ -11,6 +11,11 @@ angular.module('SpencerApplegateBlog', ['SpencerApplegateBlog.services', 'Spence
             controller: 'AboutCtrl',
             activeTab: 'about'
         });
+        $routeProvider.when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl',
+            activeTab: 'about'
+        });
         $routeProvider.when('/blog', {
             templateUrl: 'views/blog/list.html',
             controller: 'BlogCtrl',

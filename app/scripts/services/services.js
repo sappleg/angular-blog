@@ -2,10 +2,10 @@
 
 /* Services */
 
-angular.module('SpencerApplegateBlog.services', ['ngResource'])
+angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
     .factory('Post', ['$http', '$q', '_api', function($http, $q, _api) {
         var Post = function(data) {
-            angular.extend(this, {}, data);
+            angular.extend(this, data);
         };
 
         Post.query = function() {
@@ -92,7 +92,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         };
 
         Comment.remove = function(params, callback) {
-            $http({method: 'DELETE', url: _api + '/comments/' + params.id})
+            $http({method: 'DELETE', url: _api + '/comments/' + params.id, withCredentials: true})
                 .success(callback)
                 .error(function() {
                     console.log('There was an error deleting the comment');
@@ -104,6 +104,36 @@ angular.module('SpencerApplegateBlog.services', ['ngResource'])
         };
 
         return Comment;
+    }])
+
+    .factory('Login', ['$http', '$cookies', '_api', function($http, $cookies, _api) {
+        var Login = function(data) {
+            angular.extend(this, data);
+        }
+
+        Login.login = function(data, callback) {
+            $http({method: 'POST', url: _api + '/auth/login/', data: angular.toJson(data), withCredentials: true})
+                .success(function(data, status, headers, config) {
+                    console.log(headers(''));
+                    callback();
+                })
+                .error(function() {
+                    console.log('There was an error logging in');
+                });
+        };
+        
+        Login.logout = function(callback) {
+            $http({method: 'GET', url: _api + '/auth/logout/'})
+                .success(function(successData) {
+                    console.log(successData);
+                    callback();
+                })
+                .error(function() {
+                    console.log('There was an error logging out');  
+                });
+        };
+
+        return Login;
     }])
 
         // current version of the application
