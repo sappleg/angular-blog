@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs" ng-controller="NavCtrl">
+    <!-- ng-class field checks the current route of the page and compares it to each page's route to select active tab -->
+    <li ng-class="{active: $route.current.activeTab == 'about'}"><a href="#/">About</a></li>
+    <li ng-class="{active: $route.current.activeTab == 'blog'}"><a href="#/blog">Blog</a></li>
+    <li ng-class="{active: $route.current.activeTab == 'contact'}"><a href="#/contact">Contact</a></li>
+</ul>
