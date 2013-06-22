@@ -80,7 +80,7 @@ angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
 
     .factory('Comment', ['$http', '$q', '_api', function($http, $q, _api) {
         var Comment = function(data) {
-            angular.extend(this, {}, data);
+            angular.extend(this, data);
         };
 
         Comment.save = function(comment, callback) {
@@ -109,11 +109,11 @@ angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
     .factory('Login', ['$http', '$cookies', '_api', function($http, $cookies, _api) {
         var Login = function(data) {
             angular.extend(this, data);
-        }
+        };
 
         Login.login = function(data, callback) {
             $http({method: 'POST', url: _api + '/auth/login/', data: angular.toJson(data), withCredentials: true})
-                .success(function(data, status, headers, config) {
+                .success(function(data, status, headers) {
                     console.log(headers(''));
                     callback();
                 })
