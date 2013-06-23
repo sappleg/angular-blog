@@ -3,7 +3,7 @@
 /* Services */
 
 angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
-    .factory('Post', ['$http', '$q', '_api', function($http, $q, _api) {
+    .factory('Post', ['$http', '$q', '$location', '_api', function($http, $q, $location, _api) {
         var Post = function(data) {
             angular.extend(this, data);
         };
@@ -44,10 +44,16 @@ angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
         };
 
         Post.save = function(post, callback) {
-            $http({method: 'POST', url: _api + '/posts', data: post})
+            $http({method: 'POST', url: _api + '/posts/', data: post, withCredentials: true})
                 .success(callback)
-                .error(function() {
-                    console.log('There was an error creating your post');
+                .error(function(data, status, headers, config) {
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers());
+                    console.log(config);
+                    if (status === 401) {
+                        $location.path('/login');
+                    }
                 })
         };
 
@@ -106,15 +112,14 @@ angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
         return Comment;
     }])
 
-    .factory('Login', ['$http', '$cookies', '_api', function($http, $cookies, _api) {
-        var Login = function(data) {
+    .factory('Auth', ['$http', '$cookies', '_api', function($http, $cookies, _api) {
+        var Auth = function(data) {
             angular.extend(this, data);
         };
 
-        Login.login = function(data, callback) {
+        Auth.login = function(data, callback) {
             $http({method: 'POST', url: _api + '/auth/login/', data: angular.toJson(data), withCredentials: true})
-                .success(function(data, status, headers) {
-                    console.log(headers(''));
+                .success(function() {
                     callback();
                 })
                 .error(function() {
@@ -122,18 +127,20 @@ angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
                 });
         };
         
-        Login.logout = function(callback) {
+        Auth.logout = function(callback) {
             $http({method: 'GET', url: _api + '/auth/logout/'})
                 .success(function(successData) {
                     console.log(successData);
                     callback();
                 })
-                .error(function() {
+                .error(function(data, status, headers, config) {
                     console.log('There was an error logging out');  
+                    console.log(data);
+                    console.log(status);
                 });
         };
 
-        return Login;
+        return Auth;
     }])
 
         // current version of the application

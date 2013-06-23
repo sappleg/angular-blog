@@ -11,10 +11,9 @@ angular.module('SpencerApplegateBlog.controllers', ['ngCookies'])
     }])
 
     // about page control
-    .controller('AboutCtrl', ['$scope', '$location', '$cookies', 'Login', function($scope, $location, $cookies, Login) {
+    .controller('AboutCtrl', ['$scope', '$location', '$cookies', 'Auth', function($scope, $location, $cookies, Auth) {
         $scope.logout = function() {
-//            console.log($cookies);
-            Login.logout(function() {
+            Auth.logout(function() {
                 $location.path('/');
             });
         };
@@ -111,14 +110,9 @@ angular.module('SpencerApplegateBlog.controllers', ['ngCookies'])
 
     }])
 
-    .controller('LoginCtrl', ['$scope', '$location', 'Login', function($scope, $location, Login) {
-        $scope.save = function() {
-            var LoginData = {
-                "email": $scope.email,
-                "password": $scope.password
-            };
-
-            Login.login(LoginData, function() {
+    .controller('LoginCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
+        $scope.login= function() {
+            Auth.login({"email": $scope.email, "password": $scope.password}, function() {
                 $location.path('/');
             });
         }
