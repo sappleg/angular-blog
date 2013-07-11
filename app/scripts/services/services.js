@@ -113,9 +113,6 @@ angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
     }])
 
     .factory('Auth', ['$http', '$cookies', '_api', function($http, $cookies, _api) {
-//        var Auth = function(data) {
-//            angular.extend(this, data);
-//        };
 
         return {
             loggedIn: false,
@@ -137,6 +134,10 @@ angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
                     .error(function() {
                         console.log('There was an error logging out');
                     });
+            },
+
+            setLoggedIn : function(isLoggedIn) {
+                this.loggedIn = isLoggedIn;
             }
         };
     }])

@@ -16,7 +16,7 @@ angular.module('SpencerApplegateBlog.controllers', ['ngCookies'])
 
         $scope.logout = function() {
             Auth.logout(function() {
-                $scope.auth.loggedIn = false;
+                $scope.auth.setLoggedIn(false);
                 $location.path('/');
             });
         };
@@ -124,7 +124,7 @@ angular.module('SpencerApplegateBlog.controllers', ['ngCookies'])
 
         $scope.login = function() {
             Auth.login({"email": $scope.email, "password": $scope.password}, function() {
-                $scope.auth.loggedIn = true;
+                $scope.auth.setLoggedIn(true);
                 $location.path('/');
             });
         }
