@@ -12,17 +12,23 @@ angular.module('SpencerApplegateBlog.controllers', ['ngCookies'])
 
     // about page control
     .controller('AboutCtrl', ['$scope', '$location', '$cookies', 'Auth', function($scope, $location, $cookies, Auth) {
+        $scope.auth = Auth;
+
         $scope.logout = function() {
             Auth.logout(function() {
+                $scope.auth.loggedIn = false;
                 $location.path('/');
             });
         };
     }])
 
     // blog page control
-    .controller('BlogCtrl', ['$scope', '$location', 'load', function($scope, $location, load) {
+    .controller('BlogCtrl', ['$scope', '$location', 'load', 'Auth', function($scope, $location, load, Auth) {
         // sets posts on scope as return from promise object in routeProvider's resolve
         $scope.posts = load;
+
+        // expose Auth to the scope
+        $scope.auth = Auth;
 
         // redirects to viewing mode of blog post
         $scope.view = function(id) {
@@ -72,9 +78,12 @@ angular.module('SpencerApplegateBlog.controllers', ['ngCookies'])
     }])
 
     // view post page control
-    .controller('ViewCtrl', ['$scope', '$location', '$routeParams', 'load', 'Comment', 'Post', function($scope, $location, $routeParams, load, Comment, Post) {
+    .controller('ViewCtrl', ['$scope', '$routeParams', 'load', 'Comment', 'Post', 'Auth', function($scope, $routeParams, load, Comment, Post, Auth) {
         // TODO: move this to a resolve service on routeProvider
         $scope.post = load;
+
+        // expose Auth to the scope
+        $scope.auth = Auth;
 
         $scope.destroy = function(id) {
             Comment.remove({id: id}, function() {
@@ -111,8 +120,11 @@ angular.module('SpencerApplegateBlog.controllers', ['ngCookies'])
     }])
 
     .controller('LoginCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
-        $scope.login= function() {
+        $scope.auth = Auth;
+
+        $scope.login = function() {
             Auth.login({"email": $scope.email, "password": $scope.password}, function() {
+                $scope.auth.loggedIn = true;
                 $location.path('/');
             });
         }

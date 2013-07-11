@@ -113,34 +113,32 @@ angular.module('SpencerApplegateBlog.services', ['ngResource', 'ngCookies'])
     }])
 
     .factory('Auth', ['$http', '$cookies', '_api', function($http, $cookies, _api) {
-        var Auth = function(data) {
-            angular.extend(this, data);
-        };
+//        var Auth = function(data) {
+//            angular.extend(this, data);
+//        };
 
-        Auth.login = function(data, callback) {
-            $http({method: 'POST', url: _api + '/auth/login/', data: angular.toJson(data), withCredentials: true})
-                .success(function() {
-                    callback();
-                })
-                .error(function() {
-                    console.log('There was an error logging in');
-                });
-        };
-        
-        Auth.logout = function(callback) {
-            $http({method: 'GET', url: _api + '/auth/logout/'})
-                .success(function(successData) {
-                    console.log(successData);
-                    callback();
-                })
-                .error(function(data, status, headers, config) {
-                    console.log('There was an error logging out');  
-                    console.log(data);
-                    console.log(status);
-                });
-        };
+        return {
+            loggedIn: false,
+            login : function(data, callback) {
+                $http({method: 'POST', url: _api + '/auth/login/', data: angular.toJson(data), withCredentials: true})
+                    .success(function() {
+                        callback();
+                    })
+                    .error(function() {
+                        console.log('There was an error logging in');
+                    });
+            },
 
-        return Auth;
+            logout : function(callback) {
+                $http({method: 'GET', url: _api + '/auth/logout/'})
+                    .success(function() {
+                        callback();
+                    })
+                    .error(function() {
+                        console.log('There was an error logging out');
+                    });
+            }
+        };
     }])
 
         // current version of the application
