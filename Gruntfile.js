@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 
     // configurable paths
     var yeomanConfig = {
-        app: 'app',
+        app: 'src',
         dist: 'dist'
     };
 
@@ -22,11 +22,11 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             coffee: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+                files: ['<%= yeoman.app %>/app/{,*/}*.coffee'],
                 tasks: ['coffee:dist']
             },
             coffeeTest: {
-                files: ['test/spec/{,*/}*.coffee'],
+                files: ['<%= yeoman.app %>/app/{,*/}*spec.coffee'],
                 tasks: ['coffee:test']
             },
             compass: {
@@ -36,9 +36,8 @@ module.exports = function (grunt) {
             livereload: {
                 files: [
                     '<%= yeoman.app %>/{,*/}*.html',
-                    '<%= yeoman.app %>/views/{,*/}*.html',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '{.tmp,<%= yeoman.app %>}/app/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ],
                 tasks: ['livereload']
@@ -66,7 +65,8 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test')
+//                            need to change for testing
+//                            mountFolder(connect, 'test')
                         ];
                     }
                 }
@@ -96,7 +96,7 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/scripts/{,*/}*.js'
+                '<%= yeoman.app %>/app/{,*/}*.js'
             ]
         },
         karma: {
@@ -109,7 +109,7 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/scripts',
+                    cwd: '<%= yeoman.app %>/app',
                     src: '{,*/}*.coffee',
                     dest: '.tmp/scripts',
                     ext: '.js'
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
             test: {
                 files: [{
                     expand: true,
-                    cwd: 'test/spec',
+                    cwd: '<%= yeoman.app %>/app',
                     src: '{,*/}*.coffee',
                     dest: '.tmp/spec',
                     ext: '.js'
@@ -130,7 +130,7 @@ module.exports = function (grunt) {
                 sassDir: '<%= yeoman.app %>/styles',
                 cssDir: '.tmp/styles',
                 imagesDir: '<%= yeoman.app %>/images',
-                javascriptsDir: '<%= yeoman.app %>/scripts',
+                javascriptsDir: '<%= yeoman.app %>/app',
                 fontsDir: '<%= yeoman.app %>/styles/fonts',
                 importPath: '<%= yeoman.app %>/components',
                 relativeAssets: true
@@ -147,7 +147,7 @@ module.exports = function (grunt) {
                 files: {
                     '<%= yeoman.dist %>/scripts/scripts.js': [
                         '.tmp/scripts/{,*/}*.js',
-                        '<%= yeoman.app %>/scripts/{,*/}*.js'
+                        '<%= yeoman.app %>/app/{,*/}*.js'
                     ]
                 }
             }

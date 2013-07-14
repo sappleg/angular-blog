@@ -6,14 +6,12 @@
  * To change this template use File | Settings | File Templates.
  */
 
+'use strict';
+
 angular.module('blog.comments', [
         'comments.edit',
         'comments.list'])
 
-    // this filter will return the correct comments for a given post by comparing
-    // the respective post id w/ all the comments postId's.  There MUST be a more
-    // optimal way of doing this. [ ng-show was not working.  There is a commented
-    // line in the view partial with my attempt at an implementation of it]
     .filter('comment', [function() {
         return function(comments, id) {
             return _.filter(comments, function(comment) {
@@ -49,4 +47,3 @@ angular.module('blog.comments', [
 
         return Comment;
     }])
-

@@ -3,7 +3,5 @@ app/components
 .tmp
 .sass-cache
 .idea
-.jshintrc
 .editorconfig
-.bowerrc
 .gitattributes
