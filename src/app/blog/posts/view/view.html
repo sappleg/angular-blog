@@ -1,0 +1,12 @@
+<!-- navigation -->
+<div ng-include src="'views/nav.html'"></div>
+
+<!-- Show title, timestamp, and body -->
+<h4>{{post.title}}</h4>
+<p>{{post.datetime | date:'fullDate'}}</p>
+<p>{{post.text}}</p>
+
+<!-- new comment button -->
+<a href="#/blog/{{post.id}}/comments/new" class="btn">New Comment</a>
+
+<div ng-include src=" 'comments/list/list.html' "></div>

@@ -1,0 +1,8 @@
+<!-- lists comments from newest to oldest -->
+<!--<div ng-repeat="comment in comments | reverse | comment:post._id.$oid">-->
+<div ng-repeat="comment in post.comments | reverse" class="well">
+    <p>{{comment.email}}</p>
+    <p class="post-timestamp">{{comment.timestamp | date:'fullDate'}}</p>
+    <p>{{comment.text}}</p>
+    <a ng-show="auth.loggedIn" ng-click="destroy(comment.id)" class="btn btn-danger">Delete</a>
+</div>
