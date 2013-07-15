@@ -11,7 +11,7 @@
 angular.module('meta.contact', [])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/contact', {
-            templateUrl: 'contact.html',
+            templateUrl: 'app/meta/contact/contact.html',
             controller: 'meta.ContactCtrl',
             activeTab: 'contact'
         });

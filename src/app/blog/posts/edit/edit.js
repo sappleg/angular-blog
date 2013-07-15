@@ -11,18 +11,18 @@
 angular.module('posts.edit', [])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/blog/new/', {
-            templateUrl: 'views/blog/edit.html',
-            controller: 'CreateCtrl',
+            templateUrl: 'app/blog/posts/edit/edit.html',
+            controller: 'posts.CreateCtrl',
             activeTab: 'blog'
         });
         $routeProvider.when('/blog/edit/:id', {
-            templateUrl: 'views/blog/edit.html',
-            controller: 'EditCtrl',
+            templateUrl: 'app/blog/posts/edit/edit.html',
+            controller: 'posts.EditCtrl',
             activeTab: 'blog'
         });
     }])
 
-    .controller('CreateCtrl', ['$scope', '$location', 'Post', function($scope, $location, Post) {
+    .controller('posts.CreateCtrl', ['$scope', '$location', 'Post', function($scope, $location, Post) {
         // saves the newly created post
         $scope.save = function() {
             Post.save($scope.post, function() {
@@ -31,7 +31,7 @@ angular.module('posts.edit', [])
         };
     }])
 
-    .controller('EditCtrl', ['$scope', '$routeParams', '$location', 'Post', function($scope, $routeParams, $location, Post) {
+    .controller('posts.EditCtrl', ['$scope', '$routeParams', '$location', 'Post', function($scope, $routeParams, $location, Post) {
         // define local self variable
         var self = this;
 

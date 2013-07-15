@@ -13,21 +13,21 @@ angular.module('comments.edit', [])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/blog/:postId/comments/new', {
-            templateUrl: 'views/blog/comments/edit.html',
-            controller: 'CreateCommentCtrl',
+            templateUrl: 'app/blog/comments/edit/edit.html',
+            controller: 'comments.CreateCtrl',
             activeTab: 'blog'
         });
     }])
 
-    .controller('CreateCommentCtrl', ['$scope', '$location', '$routeParams', 'Comment', function($scope, $location, $routeParams, Comment) {
+    .controller('comments.CreateCtrl', ['$scope', '$location', '$routeParams', 'Comment', function($scope, $location, $routeParams, Comment) {
 
         // saves the newly created post
         $scope.save = function() {
 
             // adds a timestamp and post id to the created post object
-            $scope.comment.timestamp = new Date();
+//            $scope.comment.timestamp = new Date();
             $scope.comment.postId = $routeParams.postId;
-            $scope.comment.parentId = "";
+//            $scope.comment.parentId = "";
 
             Comment.save($scope.comment, function() {
                 // relocate to the blog page after saving the post

@@ -1,3 +1,11 @@
+/**
+ * Created with JetBrains WebStorm.
+ * User: spencer
+ * Date: 7/14/13
+ * Time: 2:37 PM
+ * To change this template use File | Settings | File Templates.
+ */
+
 'use strict';
 
 /* global _:false */
@@ -10,7 +18,7 @@ angular.module('app', [
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'views/about.html',
+            templateUrl: 'app/meta/about/about.html',
             controller: 'meta.AboutCtrl',
             activeTab: 'about'
         });

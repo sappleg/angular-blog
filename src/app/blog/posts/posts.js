@@ -23,10 +23,11 @@ angular.module('blog.posts', [
 
             $http({method: 'GET', url: _api+ '/posts/'})
                 .success(function(data) {
-                    data = _.map(data, function(value) {
+                    data = _.map(data, function(value, key) {
                         // TODO: abstract away the timestamp calculation from this controller to make more reusable
-                        var timestamp = value.id.toString().substring(0, 8);
+                        var timestamp = key.toString().substring(0, 8);
                         value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
+                        value.id = key; // Added after josh removed id's on objects with /posts/ GET
                         return value;
                     });
 
@@ -55,29 +56,29 @@ angular.module('blog.posts', [
 
         Post.save = function(post, callback) {
             $http({method: 'POST', url: _api + '/posts/', data: post, withCredentials: true})
-                .success(callback)
-                .error(function(data, status, headers, config) {
-                    console.log(data);
-                    console.log(status);
-                    console.log(headers());
-                    console.log(config);
-                    if (status === 401) {
-                        $location.path('/login');
-                    }
+                .success(function() {
+                    callback();
+                })
+                .error(function() {
+                    console.log('There was an error creating your post');
                 })
         };
 
         Post.update = function(params, post, callback) {
             $http({method: 'PUT', url: _api + '/posts/' + params.id, data: post})
-                .success(callback)
+                .success(function() {
+                    callback();
+                })
                 .error(function() {
                     console.log('There was an error saving your post');
                 });
         };
 
         Post.remove = function(params, callback) {
-            $http({method: 'DELETE', url: _api + '/posts/' + params.id})
-                .success(callback)
+            $http({method: 'DELETE', url: _api + '/posts/' + params.id, withCredentials: true})
+                .success(function() {
+                    callback();
+                })
                 .error(function() {
                     console.log('There was an error deleting your post');
                 });

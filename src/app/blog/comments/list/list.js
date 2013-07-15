@@ -5,3 +5,7 @@
  * Time: 1:35 PM
  * To change this template use File | Settings | File Templates.
  */
+
+'use strict';
+
+angular.module('comments.list', []);

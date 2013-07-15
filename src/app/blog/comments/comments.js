@@ -26,7 +26,7 @@ angular.module('blog.comments', [
         };
 
         Comment.save = function(comment, callback) {
-            $http({method: 'POST', url: _api + '/comments', data: comment})
+            $http({method: 'POST', url: _api + '/comments/', data: comment})
                 .success(callback)
                 .error(function() {
                     console.log('There was an error saving the comment');

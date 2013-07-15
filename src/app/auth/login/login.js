@@ -11,8 +11,8 @@
 angular.module('auth.login', [])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/', {
-            templateUrl: 'login.html',
+        $routeProvider.when('/login', {
+            templateUrl: 'app/auth/login/login.html',
             controller: 'login.LoginCtrl',
             activeTab: 'about'
         });

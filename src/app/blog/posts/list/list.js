@@ -9,9 +9,9 @@
 'use strict';
 
 angular.module('posts.list', [])
-    .config('$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/blog', {
-            templateUrl: 'list.html',
+            templateUrl: 'app/blog/posts/list/list.html',
             controller: 'posts.ListCtrl',
             activeTab: 'blog',
             resolve: {
@@ -20,7 +20,7 @@ angular.module('posts.list', [])
                 }]
             }
         });
-    })
+    }])
 
     .controller('posts.ListCtrl', ['$scope', '$location', 'load', 'Auth', function($scope, $location, load, Auth) {
         // sets posts on scope as return from promise object in routeProvider's resolve

@@ -11,7 +11,7 @@
 angular.module('auth', [
         'auth.login'])
 
-    .factory('Auth', ['$http', '$cookies', '_api', function($http, $cookies, _api) {
+    .factory('Auth', ['$http', '_api', function($http, _api) {
 
         return {
             loggedIn: false,

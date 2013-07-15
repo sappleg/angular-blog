@@ -11,7 +11,7 @@
 angular.module('meta.about', [])
     // About route Configuration is contained in app.js since it is the landing page
 
-    .controller('meta.AboutCtrl', ['$scope', '$location', '$cookies', 'Auth', function($scope, $location, $cookies, Auth) {
+    .controller('meta.AboutCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
         $scope.auth = Auth;
 
         $scope.logout = function() {
