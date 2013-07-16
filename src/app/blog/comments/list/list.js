@@ -8,4 +8,8 @@
 
 'use strict';
 
-angular.module('comments.list', []);
+angular.module('comments.list', [])
+
+    .controller('comments.ListCtrl', ['$scope', '$routeParams', 'Comment', function($scope, $routeParams, Comment) {
+        $scope.comments = Comment.query({postId: $routeParams.id});
+    }])

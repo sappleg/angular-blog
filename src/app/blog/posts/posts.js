@@ -23,11 +23,10 @@ angular.module('blog.posts', [
 
             $http({method: 'GET', url: _api+ '/posts/'})
                 .success(function(data) {
-                    data = _.map(data, function(value, key) {
+                    data = _.map(data, function(value) {
                         // TODO: abstract away the timestamp calculation from this controller to make more reusable
-                        var timestamp = key.toString().substring(0, 8);
+                        var timestamp = value.id.toString().substring(0, 8);
                         value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
-                        value.id = key; // Added after josh removed id's on objects with /posts/ GET
                         return value;
                     });
 

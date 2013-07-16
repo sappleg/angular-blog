@@ -25,9 +25,25 @@ angular.module('blog.comments', [
             angular.extend(this, data);
         };
 
+        Comment.query = function(params) {
+            var deferred = $q.defer();
+
+            $http({method: 'GET', url: _api + '/posts/' + params.postId + '/comments/'})
+                .success(function(data) {
+                    deferred.resolve(data);
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+
+            return deferred.promise;
+        };
+
         Comment.save = function(comment, callback) {
             $http({method: 'POST', url: _api + '/comments/', data: comment})
-                .success(callback)
+                .success(function() {
+                    callback();
+                })
                 .error(function() {
                     console.log('There was an error saving the comment');
                 });
@@ -35,7 +51,9 @@ angular.module('blog.comments', [
 
         Comment.remove = function(params, callback) {
             $http({method: 'DELETE', url: _api + '/comments/' + params.id, withCredentials: true})
-                .success(callback)
+                .success(function() {
+                    callback();
+                })
                 .error(function() {
                     console.log('There was an error deleting the comment');
                 });
