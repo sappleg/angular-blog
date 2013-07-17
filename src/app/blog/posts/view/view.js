@@ -18,13 +18,11 @@ angular.module('posts.view', [])
             resolve: {
                 load: ['$route', 'Post', 'Comment', function($route, Post, Comment) {
                     // TODO: refactor this to not access $route, may need to rethink resolve approach
-                    return Post.get({id: $route.current.pathParams.id}).then(function(post) {
-//                        post.comments = _.map(Comment.query({postId: $route.current.pathParams.id}), function(value) {
-//                            // TODO: move this functionality to comments
-//                            var timestamp = value.id.toString().substring(0, 8);
-//                            value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
-//                            return value;
-//                        });
+                    return Post.get({id: $route.current.pathParams.id})
+                        .then(function(post) {
+                            // TODO: abstract away the timestamp calculation from this controller to make more reusable
+                            var timestamp = post.id.toString().substring(0, 8);
+                            post.timestamp = new Date(parseInt(timestamp, 16) * 1000);
 
                         return post;
                     });

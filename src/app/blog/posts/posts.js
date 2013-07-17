@@ -27,6 +27,7 @@ angular.module('blog.posts', [
                         // TODO: abstract away the timestamp calculation from this controller to make more reusable
                         var timestamp = value.id.toString().substring(0, 8);
                         value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
+
                         return value;
                     });
 

@@ -4,6 +4,6 @@
         <p>{{comment.email}}</p>
         <p class="post-timestamp">{{comment.timestamp | date:'fullDate'}}</p>
         <p>{{comment.text}}</p>
-        <a ng-show="auth.loggedIn" ng-click="destroy(comment.id)" class="btn btn-danger">Delete</a>
+        <a ng-show="auth.loggedIn" ng-click="destroy(comment)" class="btn btn-danger">Delete</a>
     </div>
 </div>

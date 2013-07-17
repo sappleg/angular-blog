@@ -36,10 +36,11 @@ angular.module('posts.edit', [])
         var self = this;
 
         // grabs the correct post object based on id
-        Post.get({id: $routeParams.id}).then(function(post) {
-            self.original = post;
-            $scope.post = new Post(self.original);
-        });
+        Post.get({id: $routeParams.id})
+            .then(function(post) {
+                self.original = post;
+                $scope.post = new Post(self.original);
+            });
 
         // checks to see if the post in the details page has been changed
         $scope.isClean = function() {
