@@ -9,7 +9,8 @@
 'use strict';
 
 angular.module('auth', [
-        'auth.login'])
+        'auth.login'
+    ])
 
     .factory('Auth', ['$http', '_api', function($http, _api) {
 

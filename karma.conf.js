@@ -9,14 +9,13 @@ files = [
   JASMINE_ADAPTER,
   'src/components/angular/angular.js',
   'src/components/angular-mocks/angular-mocks.js',
-  'src/app/*.js',
   'src/app/**/*.js',
 ];
 //'test/mock/**/*.js',
 //'test/spec/**/*.js'
 
 // list of files to exclude
-exclude = [];
+exclude = ['src/app/rebuildTree.js'];
 
 // test results reporter to use
 // possible values: dots || progress || growl

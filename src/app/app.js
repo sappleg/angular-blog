@@ -8,13 +8,12 @@
 
 'use strict';
 
-/* global _:false */
-
 angular.module('app', [
         'auth',
         'blog',
         'meta',
-        'nav'])
+        'nav'
+    ])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
@@ -28,7 +27,7 @@ angular.module('app', [
     .filter('interpolate', ['version', function(version) {
         return function(text) {
             return String(text).replace(/\%VERSION\%/mg, version);
-        }
+        };
     }])
 
     .value('version', '0.1')

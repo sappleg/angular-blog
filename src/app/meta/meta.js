@@ -8,4 +8,5 @@
 
 angular.module('meta', [
         'meta.about',
-        'meta.contact'])
+        'meta.contact'
+    ]);
