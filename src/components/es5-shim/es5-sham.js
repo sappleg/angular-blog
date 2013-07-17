@@ -164,9 +164,9 @@ if (!Object.create) {
     } else {
         // In old IE __proto__ can't be used to manually set `null`, nor does
         // any other method exist to make an object that inherits from nothing,
-        // aside from Object.prototype itself. Instead, edit a new global
+        // aside from Object.prototype itself. Instead, create a new global
         // object and *steal* its Object.prototype and strip it bare. This is
-        // used as the prototype to edit nullary objects.
+        // used as the prototype to create nullary objects.
         createEmpty = function () {
             var iframe = document.createElement('iframe');
             var parent = document.body || document.documentElement;
@@ -207,7 +207,7 @@ if (!Object.create) {
                 // In the native implementation `parent` can be `null`
                 // OR *any* `instanceof Object`  (Object|Function|Array|RegExp|etc)
                 // Use `typeof` tho, b/c in old IE, DOM elements are not `instanceof Object`
-                // like they are in modern browsers. Using `Object.edit` on DOM elements
+                // like they are in modern browsers. Using `Object.create` on DOM elements
                 // is...err...probably inappropriate, but the native version allows for it.
                 throw new TypeError("Object prototype may only be an Object or null"); // same msg as Chrome
             }
@@ -216,7 +216,7 @@ if (!Object.create) {
             // IE has no built-in implementation of `Object.getPrototypeOf`
             // neither `__proto__`, but this manually setting `__proto__` will
             // guarantee that `Object.getPrototypeOf` will work as expected with
-            // objects created using `Object.edit`
+            // objects created using `Object.create`
             object.__proto__ = prototype;
         }
 

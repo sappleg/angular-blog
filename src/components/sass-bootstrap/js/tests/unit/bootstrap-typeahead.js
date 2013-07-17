@@ -24,7 +24,7 @@ $(function () {
         ok($._data($input[0], 'events').keyup, 'has a keyup event')
       })
 
-      test("should edit a menu", function () {
+      test("should create a menu", function () {
         var $input = $('<input />')
         ok($input.typeahead().data('typeahead').$menu, 'has a menu')
       })

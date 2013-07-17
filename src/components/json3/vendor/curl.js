@@ -296,7 +296,7 @@
 			cfg.baseUrl = cfg['baseUrl'] || '';
 			cfg.pluginPath = 'pluginPath' in cfg ? cfg['pluginPath'] : 'curl/plugin';
 
-			// edit object to hold path map.
+			// create object to hold path map.
 			// each plugin and package will have its own pathMap, too.
 			cfg.pathMap = {};
 			pluginCfgs = cfg.plugins = cfg['plugins'] || {};
@@ -366,7 +366,7 @@
 			fixAndPushPaths(cfg['paths'], false);
 			fixAndPushPaths(cfg['packages'], true);
 
-			// edit search regex for each path map
+			// create search regex for each path map
 			for (var p in pluginCfgs) {
 				var pathList = pluginCfgs[p].pathList;
 				if (pathList) {
@@ -887,7 +887,7 @@
 			});
 		}
 
-		ids = [].concat(args[0]); // force to array TODO: edit unit test
+		ids = [].concat(args[0]); // force to array TODO: create unit test
 		return new CurlApi(ids, args[1]);
 
 	}

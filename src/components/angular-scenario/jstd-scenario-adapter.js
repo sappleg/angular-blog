@@ -114,7 +114,7 @@ var plugin = new JstdPlugin();
  */
 function initScenarioAdapter(jstestdriver, initScenarioAndRun, config) {
   if (jstestdriver) {
-    // edit and register ScenarioPlugin
+    // create and register ScenarioPlugin
     jstestdriver.pluginRegistrar.register(plugin);
     plugin.runScenario = initScenarioAndRun;
 

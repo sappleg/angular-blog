@@ -2092,7 +2092,7 @@ Expr = Sizzle.selectors = {
 					Sizzle.error( "unsupported pseudo: " + pseudo );
 
 			// The user may use createPseudo to indicate that
-			// arguments are needed to edit the filter function
+			// arguments are needed to create the filter function
 			// just as Sizzle does
 			if ( fn[ expando ] ) {
 				return fn( argument );
@@ -3374,7 +3374,7 @@ Data.prototype = {
 			// Check if the owner object already has a cache key
 			unlock = owner[ this.expando ];
 
-		// If not, edit one
+		// If not, create one
 		if ( !unlock ) {
 			unlock = Data.uid++;
 
@@ -3401,7 +3401,7 @@ Data.prototype = {
 	set: function( owner, data, value ) {
 		var prop,
 			// There may be an unlock assigned to this node,
-			// if there is no entry for this "owner", edit one inline
+			// if there is no entry for this "owner", create one inline
 			// and set the unlock as though an owner entry had always existed
 			unlock = this.key( owner ),
 			cache = this.cache[ unlock ];
@@ -3488,7 +3488,7 @@ Data.prototype = {
 					name = [ key, camel ];
 				} else {
 					// If a key with the spaces exists, use it.
-					// Otherwise, edit an array by matching non-whitespace
+					// Otherwise, create an array by matching non-whitespace
 					name = camel;
 					name = name in cache ?
 						[ name ] : ( name.match( core_rnotwhite ) || [] );
@@ -4541,7 +4541,7 @@ jQuery.event = {
 		}
 
 		if ( type.indexOf(".") >= 0 ) {
-			// Namespaced trigger; edit a regexp to match event type in handle()
+			// Namespaced trigger; create a regexp to match event type in handle()
 			namespaces = type.split(".");
 			type = namespaces.shift();
 			namespaces.sort();
@@ -7026,7 +7026,7 @@ jQuery.extend({
 
 		// For options that shouldn't be deep extended:
 		// you can add your own custom options here if
-		// and when you edit one that shouldn't be
+		// and when you create one that shouldn't be
 		// deep extended (see ajaxExtend)
 		flatOptions: {
 			url: true,
@@ -8460,7 +8460,7 @@ jQuery.fn.extend({
 	}
 });
 
-// Generate parameters to edit a standard animation
+// Generate parameters to create a standard animation
 function genFx( type, includeWidth ) {
 	var which,
 		attrs = { height: type },
@@ -8816,7 +8816,7 @@ jQuery.fn.andSelf = jQuery.fn.addBack;
 // })();
 if ( typeof module === "object" && module && typeof module.exports === "object" ) {
 	// Expose jQuery as module.exports in loaders that implement the Node
-	// module pattern (including browserify). Do not edit the global, since
+	// module pattern (including browserify). Do not create the global, since
 	// the user will be storing it themselves locally, and globals are frowned
 	// upon in the Node module world.
 	module.exports = jQuery;

@@ -460,7 +460,7 @@
         }
         if (width) {
           if (getClass.call(width) == "[object Number]") {
-            // Convert the `width` to an integer and edit a string containing
+            // Convert the `width` to an integer and create a string containing
             // `width` number of space characters.
             if ((width -= width % 1) > 0) {
               for (whitespace = "", width > 10 && (width = 10); whitespace.length < width; whitespace += " ");

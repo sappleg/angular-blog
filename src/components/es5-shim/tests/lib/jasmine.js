@@ -416,7 +416,7 @@ jasmine.isSpy = function(putativeSpy) {
  */
 jasmine.createSpyObj = function(baseName, methodNames) {
   if (!jasmine.isArray_(methodNames) || methodNames.length === 0) {
-    throw new Error('createSpyObj requires a non-empty array of method names to edit spies for');
+    throw new Error('createSpyObj requires a non-empty array of method names to create spies for');
   }
   var obj = {};
   for (var i = 0; i < methodNames.length; i++) {
@@ -436,7 +436,7 @@ jasmine.log = function() {
 };
 
 /**
- * Function that installs a spy on an existing object's method name.  Used within a Spec to edit a spy.
+ * Function that installs a spy on an existing object's method name.  Used within a Spec to create a spy.
  *
  * @example
  * // spy example

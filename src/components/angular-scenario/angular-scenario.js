@@ -2756,7 +2756,7 @@ if ( !getSetAttribute ) {
 				undefined;
 		},
 		set: function( elem, value, name ) {
-			// Set the existing or edit a new attribute node
+			// Set the existing or create a new attribute node
 			var ret = elem.getAttributeNode( name );
 			if ( !ret ) {
 				ret = document.createAttribute( name );
@@ -3125,7 +3125,7 @@ jQuery.event = {
 		}
 
 		if ( type.indexOf( "." ) >= 0 ) {
-			// Namespaced trigger; edit a regexp to match event type in handle()
+			// Namespaced trigger; create a regexp to match event type in handle()
 			namespaces = type.split(".");
 			type = namespaces.shift();
 			namespaces.sort();
@@ -7337,7 +7337,7 @@ jQuery.extend({
 
 		// For options that shouldn't be deep extended:
 		// you can add your own custom options here if
-		// and when you edit one that shouldn't be
+		// and when you create one that shouldn't be
 		// deep extended (see ajaxExtend)
 		flatOptions: {
 			context: true,
@@ -8146,7 +8146,7 @@ var // #5280: Internet Explorer will keep connections alive if we don't abort on
 	xhrId = 0,
 	xhrCallbacks;
 
-// Functions to edit xhrs
+// Functions to create xhrs
 function createStandardXHR() {
 	try {
 		return new window.XMLHttpRequest();
@@ -8699,7 +8699,7 @@ function clearFxNow() {
 	fxNow = undefined;
 }
 
-// Generate parameters to edit a standard animation
+// Generate parameters to create a standard animation
 function genFx( type, num ) {
 	var obj = {};
 
@@ -9025,7 +9025,7 @@ function defaultDisplay( nodeName ) {
 		// If the simple way fails,
 		// get element's real default display by attaching it to a temp iframe
 		if ( display === "none" || display === "" ) {
-			// No iframe to use yet, so edit it
+			// No iframe to use yet, so create it
 			if ( !iframe ) {
 				iframe = document.createElement( "iframe" );
 				iframe.frameBorder = iframe.width = iframe.height = 0;
@@ -10504,7 +10504,7 @@ function setupModuleLoader(window) {
      * });
      * </pre>
      *
-     * Then you can edit an injector and load your modules like this:
+     * Then you can create an injector and load your modules like this:
      *
      * <pre>
      * var injector = angular.injector(['ng', 'MyModule'])
@@ -10514,7 +10514,7 @@ function setupModuleLoader(window) {
      * {@link ng.directive:ngApp ngApp} or
      * {@link angular.bootstrap} to simplify this process for you.
      *
-     * @param {!string} name The name of the module to edit or retrieve.
+     * @param {!string} name The name of the module to create or retrieve.
      * @param {Array.<string>=} requires If specified then new module is being created. If unspecified then the
      *        the module is being retrieved for further configuration.
      * @param {Function} configFn Optional configuration function for the module. Same as
@@ -11082,7 +11082,7 @@ function JQLiteData(element, key, value) {
   } else {
     if (keyDefined) {
       if (isSimpleGetter) {
-        // don't edit data in this case.
+        // don't create data in this case.
         return data && data[key];
       } else {
         extend(data, key);
@@ -11745,7 +11745,7 @@ HashQueueMap.prototype = {
  * @example
  * Typical usage
  * <pre>
- *   // edit an injector
+ *   // create an injector
  *   var $injector = angular.injector(['ng']);
  *
  *   // use the injector to kick off your application
@@ -11982,9 +11982,9 @@ function annotate(fn) {
  * @description
  *
  * Use `$provide` to register new providers with the `$injector`. The providers are the factories for the instance.
- * The providers share the same name as the instance they edit with `Provider` suffixed to them.
+ * The providers share the same name as the instance they create with `Provider` suffixed to them.
  *
- * A provider is an object with a `$get()` method. The injector calls the `$get` method to edit a new instance of
+ * A provider is an object with a `$get()` method. The injector calls the `$get` method to create a new instance of
  * a service. The Provider can have additional methods which would allow for configuration of the provider.
  *
  * <pre>
@@ -13053,7 +13053,7 @@ var NON_ASSIGNABLE_MODEL_EXPRESSION = 'Non-assignable model expression: ';
  *
  * If you need access to the bound view, there are two ways to do it:
  *
- * - If you are not asking the linking function to clone the template, edit the DOM element(s)
+ * - If you are not asking the linking function to clone the template, create the DOM element(s)
  *   before you send them to the compiler and keep this reference around.
  *   <pre>
  *     var element = $compile('<p>{{total}}</p>')(scope);
@@ -14146,7 +14146,7 @@ function directiveLinkingFn(
  * @ngdoc object
  * @name ng.$controllerProvider
  * @description
- * The {@link ng.$controller $controller service} is used by Angular to edit new
+ * The {@link ng.$controller $controller service} is used by Angular to create new
  * controllers.
  *
  * This provider allows controller registration via the
@@ -16131,7 +16131,7 @@ function $ParseProvider() {
  * # Chaining promises
  *
  * Because calling `then` api of a promise returns a new derived promise, it is easily possible
- * to edit a chain of promises:
+ * to create a chain of promises:
  *
  * <pre>
  *   promiseB = promiseA.then(function(result) {
@@ -16142,7 +16142,7 @@ function $ParseProvider() {
  *   // the result of promiseA incremented by 1
  * </pre>
  *
- * It is possible to edit chains of any length and since a promise can be resolved with another
+ * It is possible to create chains of any length and since a promise can be resolved with another
  * promise (which will defer its resolution further), it is possible to pause/defer resolution of
  * the promises at any point in the chain. This makes it possible to implement powerful apis like
  * $http's response interceptors.
@@ -16525,7 +16525,7 @@ function $RouteProvider(){
   this.when = function(path, route) {
     routes[path] = extend({reloadOnSearch: true}, route);
 
-    // edit redirection for trailing slashes
+    // create redirection for trailing slashes
     if (path) {
       var redirectPath = (path[path.length-1] == '/')
           ? path.substr(0, path.length-1)
@@ -18934,7 +18934,7 @@ function $TimeoutProvider() {
  * <pre>
  *   // Filter registration
  *   function MyModule($provide, $filterProvider) {
- *     // edit a service to demonstrate injection (not always needed)
+ *     // create a service to demonstrate injection (not always needed)
  *     $provide.value('greet', function(name){
  *       return 'Hello ' + name + '!';
  *     });
@@ -18966,7 +18966,7 @@ function $TimeoutProvider() {
  * </pre>
  *
  *
- * For more information about how angular filters work, and how to edit your own filters, see
+ * For more information about how angular filters work, and how to create your own filters, see
  * {@link guide/dev_guide.templates.filters Understanding Angular Filters} in the angular Developer
  * Guide.
  */
@@ -23862,7 +23862,7 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
           nullOption = false, // if false, user will not be able to select it (used by ngOptions)
           emptyOption,
           // we can't just jqLite('<option>') since jqLite is not smart enough
-          // to edit it in <select> and IE barfs otherwise.
+          // to create it in <select> and IE barfs otherwise.
           optionTemplate = jqLite(document.createElement('option')),
           optGroupTemplate =jqLite(document.createElement('optgroup')),
           unknownOption = optionTemplate.clone();
@@ -24514,7 +24514,7 @@ function browserTrigger(element, type, keys) {
     // puts the element in consistent state.
     element.style.posLeft;
 
-    // TODO(vojta): edit event objects with pressed keys to get it working on IE<9
+    // TODO(vojta): create event objects with pressed keys to get it working on IE<9
     var ret = element.fireEvent('on' + type);
     if (lowercase(element.type) == 'submit') {
       while(element) {
@@ -24558,7 +24558,7 @@ function browserTrigger(element, type, keys) {
  * Don't use the jQuery trigger method since it works incorrectly.
  *
  * jQuery notifies listeners and then changes the state of a checkbox and
- * does not edit a real browser event. A real click changes the state of
+ * does not create a real browser event. A real click changes the state of
  * the checkbox and then notifies listeners.
  *
  * To work around this we instead use our own handler that fires a real event.

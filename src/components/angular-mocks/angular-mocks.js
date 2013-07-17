@@ -456,7 +456,7 @@ angular.mock.$LogProvider = function() {
    *
    * Mock of the Date type which has its timezone specified via constructor arg.
    *
-   * The main purpose is to edit Date-like instances with timezone fixed to the specified timezone
+   * The main purpose is to create Date-like instances with timezone fixed to the specified timezone
    * offset, so that we can test code that depends on local timezone settings without dependency on
    * the time zone settings of the machine where the code is running.
    *
@@ -764,7 +764,7 @@ angular.mock.dump = function(object) {
  * # Flushing HTTP requests
  *
  * The $httpBackend used in production, always responds to requests with responses asynchronously.
- * If we preserved this behavior in unit testing, we'd have to edit async unit tests, which are
+ * If we preserved this behavior in unit testing, we'd have to create async unit tests, which are
  * hard to write, follow and maintain. At the same time the testing mock, can't respond
  * synchronously because that would change the execution of the code under test. For this reason the
  * mock $httpBackend has a `flush()` method, which allows the test to explicitly flush pending
@@ -1459,7 +1459,7 @@ angular.module('ngMockE2E', ['ng']).config(function($provide) {
  * testing. For this reason the e2e $httpBackend automatically flushes mocked out requests
  * automatically, closely simulating the behavior of the XMLHttpRequest object.
  *
- * To setup the application to run with this http backend, you have to edit a module that depends
+ * To setup the application to run with this http backend, you have to create a module that depends
  * on the `ngMockE2E` and your application modules and defines the fake backend:
  *
  * <pre>

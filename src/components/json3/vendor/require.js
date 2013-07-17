@@ -757,7 +757,7 @@ var requirejs, require, define;
                     if ("holdReady" in $ || "readyWait" in $) {
                         context.jQuery = $;
 
-                        //Manually edit a "jquery" module entry if not one already
+                        //Manually create a "jquery" module entry if not one already
                         //or in process. Note this could trigger an attempt at
                         //a second jQuery registration, but does no harm since
                         //the first one wins, and it is the same value anyway.

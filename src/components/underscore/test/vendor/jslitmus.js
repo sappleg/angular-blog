@@ -490,7 +490,7 @@
       jsl.$('chart').style.display = '';
 
       // Update the tiny URL
-      jsl.$('tiny_url').src = 'http://tinyurl.com/api-edit.php?url='+escape(url);
+      jsl.$('tiny_url').src = 'http://tinyurl.com/api-create.php?url='+escape(url);
     },
 
     /**
