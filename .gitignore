@@ -6,3 +6,4 @@ dist
 .idea
 .editorconfig
 .gitattributes
+libpeerconnection.log

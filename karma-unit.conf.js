@@ -7,32 +7,86 @@
  * To change this template use File | Settings | File Templates.
  */
 
-'use strict';
+//'use strict';
 
-var sharedConfig = require('./karma-shared.conf');
+        basePath = '';
 
-module.exports = function(config) {
-    sharedConfig(config);
-
-    config.set({
-        files: [
+        files = [
             JASMINE,
             JASMINE_ADAPTER,
-            'src/components/angular/angular.js',
-            'src/components/angular-mocks/angular-mocks.js',
-            'src/app/**/*spec.js',
-        ],
+            'src/app/**/*.js',
+        ];
 
-        exclude: [],
+        exclude = [];
+        //
+        // test results reporter to use
+        // possible values: dots || progress || growl
+        reporters = ['progress'];
+        //
+        // web server port
+        port = 8080;
+
+        // cli runner port
+        runnerPort = 9100;
+
+        colors = true;
+
+        logLevel = LOG_INFO;
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
+        autoWatch = true;
 
         // Continuous Integration mode
         // if true, it capture browsers, run tests and exit
-        singleRun: false
-    });
-}
+
+        // break from module
+        browsers = ['Chrome'];
+
+        singleRun = false;
+
+
+
+//var sharedConfig = require('./karma-shared.conf');
+
+//module.exports = function(config) {
+//    sharedConfig(config);
+
+    //config.set({
+        //files: [
+            //JASMINE,
+            //JASMINE_ADAPTER,
+            //'src/components/angular/angular.js',
+            //'src/components/angular-mocks/angular-mocks.js',
+            //'src/app/**/*spec.js',
+        //],
+
+        //exclude: [],
+
+         //enable / disable watching file and executing tests whenever any file changes
+        //autoWatch: true,
+
+         //Continuous Integration mode
+         //if true, it capture browsers, run tests and exit
+        //singleRun: false,
+
+         //break from module
+        //frameworks: ['jasmin'],
+        //basePath: '',
+        //logLevel: config.LOG_INFO,
+        //colors: true,
+        //browsers: ['Chrome'],
+
+         //test results reporter to use
+         //possible values: dots || progress || growl
+        //reporters: ['progress'],
+
+         //web server port
+        //port: 8080,
+
+         //cli runner port
+        //runnerPort: 9100
+    //});
+//}
 
 // Karma configuration
 
