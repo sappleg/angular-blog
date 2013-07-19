@@ -9,13 +9,14 @@
 'use strict';
 
 angular.module('auth', [
-        'auth.login'
+        'auth.login',
+        'ngCookies'
     ])
 
-    .factory('Auth', ['$http', '_api', function($http, _api) {
+    .factory('Auth', ['$http', '$cookieStore', '_api', function($http, $cookieStore, _api) {
 
         return {
-            loggedIn: false,
+            loggedIn: $cookieStore.get('LoggedIn'),
             login : function(data, callback) {
                 $http({method: 'POST', url: _api + '/auth/login/', data: angular.toJson(data), withCredentials: true})
                     .success(function() {
@@ -37,6 +38,7 @@ angular.module('auth', [
             },
 
             setLoggedIn : function(isLoggedIn) {
+                $cookieStore.put('LoggedIn', isLoggedIn);
                 this.loggedIn = isLoggedIn;
             }
         };

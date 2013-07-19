@@ -65,7 +65,10 @@ angular.module('blog.posts', [
         };
 
         Post.update = function(params, post, callback) {
-            $http({method: 'PUT', url: _api + '/posts/' + params.id, data: post})
+            //TODO: get with Josh to fix this bug
+            post.email = "spencerdev@maasive.net";
+
+            $http({method: 'PUT', url: _api + '/posts/' + params.id, data: post, withCredentials: true})
                 .success(function() {
                     callback();
                 })
