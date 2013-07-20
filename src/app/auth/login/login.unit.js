@@ -10,7 +10,9 @@
 'use strict';
 
 describe('Auth controller', function() {
-    beforeEach(module('login.LoginCtrl'));
+    beforeEach(function() {
+        angular.module('auth.login');
+    });
 
     it('should ....', inject(function() {
         expect(1).toBe(1);

@@ -8,15 +8,22 @@
 
 'use strict';
 
-describe('Blog posts and comments', function() {
+describe('filter', function() {
     var array;
 
     beforeEach(function() {
         module('blog');
-        array = [0, 1, 2, 3];
+        array = [0,1,2,3];
     });
 
-    it('should be in reverse created order', inject(function(reverseFilter) {
-        expect(reverseFilter(array)).toBe([3, 2, 1, 0]);
-    }));
+    describe('reverse', function() {
+        it('should reverse the order of elements in an array', inject(function(reverseFilter) {
+            var reversedArray = reverseFilter(array);
+
+            expect(reversedArray[0]).toBe(3);
+            expect(reversedArray[1]).toBe(2);
+            expect(reversedArray[2]).toBe(1);
+            expect(reversedArray[3]).toBe(0);
+        }));
+    });
 })
