@@ -13,10 +13,10 @@ describe('Auth controller', function() {
     beforeEach(module('login.LoginCtrl'));
 
     it('should ....', inject(function() {
-
+        expect(1).toBe(1);
     }));
 
     it('should ....', inject(function() {
-
+        expect(1).toBe(1);
     }));
 });
