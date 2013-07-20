@@ -26,4 +26,4 @@ describe('filter', function() {
             expect(reversedArray[3]).toBe(0);
         }));
     });
-})
+});

@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     };
 
     try {
-        yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
+        yeomanConfig.app = require('./config/bower.json').appPath || yeomanConfig.app;
     } catch (e) {}
 
     grunt.initConfig({
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
                         return [
                             mountFolder(connect, '.tmp'),
 //                            need to change for testing
-//                            mountFolder(connect, 'test')
+                            mountFolder(connect, 'test')
                         ];
                     }
                 }
@@ -92,7 +92,7 @@ module.exports = function (grunt) {
         },
         jshint: {
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: 'config/.jshintrc'
             },
             all: [
                 'Gruntfile.js',
@@ -101,11 +101,11 @@ module.exports = function (grunt) {
         },
         karma: {
             unit: {
-                configFile: 'karma-unit.conf.js',
+                configFile: 'config/karma-unit.conf.js',
                 singleRun: true
             },
             e2e: {
-                configFile: 'karma-e2e.conf.js',
+                configFile: 'config/karma-e2e.conf.js',
                 singleRun: true
             }
         },
