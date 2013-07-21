@@ -16,8 +16,8 @@ angular.module('auth', [
     .factory('Auth', ['$http', '$cookieStore', '_api', function($http, $cookieStore, _api) {
 
         return {
-            loggedIn: $cookieStore.get('LoggedIn'),
-            login : function(data, callback) {
+            loggedIn: $cookieStore.get('LoggedIn') || false,
+            login: function(data, callback) {
                 $http({method: 'POST', url: _api + '/auth/login/', data: angular.toJson(data), withCredentials: true})
                     .success(function() {
                         callback();
@@ -27,7 +27,7 @@ angular.module('auth', [
                     });
             },
 
-            logout : function(callback) {
+            logout: function(callback) {
                 $http({method: 'GET', url: _api + '/auth/logout/'})
                     .success(function() {
                         callback();
@@ -37,7 +37,7 @@ angular.module('auth', [
                     });
             },
 
-            setLoggedIn : function(isLoggedIn) {
+            setLoggedIn: function(isLoggedIn) {
                 $cookieStore.put('LoggedIn', isLoggedIn);
                 this.loggedIn = isLoggedIn;
             }
