@@ -14,8 +14,9 @@ describe('auth', function() {
     beforeEach(function() {
         module('app');
         module('auth');
+
         inject(function($injector, _api) {
-            api = _api
+            api = _api;
             $httpBackend = $injector.get('$httpBackend');
 
             Auth = $injector.get('Auth');
@@ -60,6 +61,8 @@ describe('auth', function() {
     });
 
     it('should set the loggedIn flag', function() {
+
+        //TODO: remove this monkey patching and write correct unit test
         var oldLoggedIn = Auth.loggedIn;
         expect(Auth.loggedIn).toBe(false);
         Auth.setLoggedIn(true);

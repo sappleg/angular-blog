@@ -22,7 +22,7 @@ angular.module('auth.login', [])
         $scope.auth = Auth;
 
         $scope.login = function() {
-            Auth.login({"email": $scope.email, "password": $scope.password}, function() {
+            $scope.auth.login({"email": $scope.email, "password": $scope.password}, function() {
                 $scope.auth.setLoggedIn(true);
                 $location.path('/');
             });

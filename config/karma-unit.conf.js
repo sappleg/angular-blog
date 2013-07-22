@@ -24,12 +24,12 @@ exclude = ['src/app/rebuildTree.js'];
 // test results reporter to use
 // possible values: dots || progress || growl
 reporters = ['progress'];
-//
+
 // web server port
 port = 8080;
 
 // cli runner port
-runnerPort = 9100;
+//runnerPort = 9100;
 
 colors = true;
 

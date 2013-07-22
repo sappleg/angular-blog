@@ -12,14 +12,6 @@ angular.module('blog.comments', [
         'comments.edit',
         'comments.list'])
 
-    .filter('comment', [function() {
-        return function(comments, id) {
-            return _.filter(comments, function(comment) {
-                return comment.postId == id;
-            })
-        }
-    }])
-
     .factory('Comment', ['$http', '$q', '_api', function($http, $q, _api) {
         var Comment = function(data) {
             angular.extend(this, data);
