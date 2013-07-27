@@ -18,8 +18,8 @@ describe('comment.edit', function() {
         module('comments.edit');
     });
 
-    describe('edit controller', function() {
-        var $scope, editCtrl, Comment;
+    describe('comments.EditCtrl', function() {
+        var $scope, editCtrl, Comment, commentNamespace;
 
         var mockComment = {
             email: 'spencerdev@maasive.net',
@@ -30,18 +30,21 @@ describe('comment.edit', function() {
             var routeParamsStub = jasmine.createSpy('routeParamsStub');
             routeParamsStub.postId = '7';
 
-            $scope = $rootScope.$new();
-
             Comment = $injector.get('Comment');
-            Comment.save = function(comment, callback) {
-                return 'saved';
+            commentNamespace = {
+                Comment: Comment
             };
-//            jasmine.spyOn(Comment, 'constructor').andReturn(mockComment);
+            commentNamespace.Comment.save = function(comment, callback) {
+                callback();
+                return '';
+            };
+
+            $scope = $rootScope.$new();
 
             editCtrl = $controller('comments.EditCtrl', {
                 $scope: $scope,
                 $routeParams: routeParamsStub,
-                Comment: Comment
+                Comment: commentNamespace.Comment
             });
         }));
 
@@ -50,22 +53,30 @@ describe('comment.edit', function() {
             expect(editCtrl).not.toBe(undefined);
         });
 
-        //TODO: figure out how to spy on Comment constructor
         describe('save function', function() {
+
             beforeEach(function() {
-//                spyOn(Comment, 'constructor');
-//                Comment.prototype.constructor = jasmine.createSpy('Comment.constructor spy').andReturn(mockComment);
+//                spyOn(commentNamespace, 'Comment');
+                spyOn(Comment.prototype, 'constructor').andCallThrough();
+                spyOn(Comment, 'save');
                 $scope.save(mockComment);
             });
 
-            it('should attach a comment to the scope and save it via the Comment service', function() {
+            //TODO: figure out how to spy on Comment constructor call
+//            it('should create a Comment object via its constructor', function() {
+//                expect(Comment.prototype.constructor).toHaveBeenCalled();
+//                expect(commentNamespace.Comment).toHaveBeenCalled();
+//            });
 
+            it('should attach a comment to the scope and save it via the Comment service', function() {
                 expect(typeof $scope.comment).toBe('object');
                 expect($scope.comment.email).toBe(mockComment.email);
                 expect($scope.comment.text).toBe(mockComment.text);
                 expect($scope.comment.postId).toBe('7');
-//                expect(Comment.prototype.constructor).toHaveBeenCalled();
-//                expect(Comment.constructor).toHaveBeenCalledWith(mockComment);
+            });
+
+            it('should call Comment\' save function', function() {
+                expect(Comment.save).toHaveBeenCalled();
             });
         });
     });

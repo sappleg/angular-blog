@@ -22,6 +22,7 @@ angular.module('comments.edit', [])
     .controller('comments.EditCtrl', ['$scope', '$location', '$routeParams', 'Comment', function($scope, $location, $routeParams, Comment) {
 
         $scope.save = function(comment) {
+            //TODO: think about how this instance of a comment should call a save function (non-statically)
             $scope.comment = new Comment(comment);
 
             $scope.comment.postId = $routeParams.postId;

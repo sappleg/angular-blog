@@ -64,9 +64,9 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
-                            mountFolder(connect, '.tmp'),
+//                            mountFolder(connect, '.tmp'),
 //                            need to change for testing
-                            mountFolder(connect, 'test')
+//                            mountFolder(connect, 'test')
                         ];
                     }
                 }
@@ -276,10 +276,16 @@ module.exports = function (grunt) {
         'watch'
     ]);
 
+//    Old test task
+//    grunt.registerTask('test', [
+//        'clean:server',
+//        'coffee',
+//        'compass',
+//        'connect:test',
+//        'karma:unit'
+//    ]);
+
     grunt.registerTask('test', [
-        'clean:server',
-        'coffee',
-        'compass',
         'connect:test',
         'karma:unit'
     ]);
