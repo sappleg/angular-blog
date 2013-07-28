@@ -1,6 +1,7 @@
 node_modules
 app/components
 dist
+log/test-results.xml
 .tmp
 .sass-cache
 .idea
