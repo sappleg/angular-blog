@@ -46,7 +46,7 @@ describe('comments.list', function() {
             })
         }));
 
-        xit('should get all the comments for a post', function() {
+        it('should get all the comments for a post', function() {
             expect(Comment.query).toHaveBeenCalled();
         });
     });
