@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="Chrome 28.0 (Mac)" package="undefined" timestamp="2013-07-28T20:41:20" id="0" hostname="MacBookPro" tests="19" errors="0" failures="0" time="0.076">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.71 Safari/537.36"/>
+    </properties>
+    <testcase name="should interpolate the version number in strings with the correct qualifier" time="0.019" classname="Chrome 28.0 (Mac).app"/>
+    <testcase name="should provide a version and Maasive api" time="0.003" classname="Chrome 28.0 (Mac).app"/>
+    <testcase name="should override a version and test the new version is injected" time="0.002" classname="Chrome 28.0 (Mac).app"/>
+    <testcase name="should build Auth" time="0.006" classname="Chrome 28.0 (Mac).auth"/>
+    <testcase name="should login to Maasive" time="0.005" classname="Chrome 28.0 (Mac).auth"/>
+    <testcase name="should logout of Maasive" time="0.003" classname="Chrome 28.0 (Mac).auth"/>
+    <testcase name="should set the loggedIn flag" time="0.005" classname="Chrome 28.0 (Mac).auth"/>
+    <testcase name="should have a login controller" time="0.004" classname="Chrome 28.0 (Mac).auth_login login controller"/>
+    <testcase name="should scope the auth functionality" time="0.002" classname="Chrome 28.0 (Mac).auth_login login controller"/>
+    <testcase name="should attach a login function to the scope" time="0.003" classname="Chrome 28.0 (Mac).auth_login login controller"/>
+    <testcase name="should call the login function on the scope" time="0.005" classname="Chrome 28.0 (Mac).auth_login login controller login function"/>
+    <testcase name="should be called with the correct params" time="0.002" classname="Chrome 28.0 (Mac).auth_login login controller login function Auth_login function"/>
+    <testcase name="should reverse the order of elements in an array" time="0.003" classname="Chrome 28.0 (Mac).filter reverse"/>
+    <testcase name="should get a list of comments" time="0.004" classname="Chrome 28.0 (Mac).comment service"/>
+    <testcase name="should save a comment" time="0.002" classname="Chrome 28.0 (Mac).comment service"/>
+    <testcase name="should remove a comment" time="0.002" classname="Chrome 28.0 (Mac).comment service"/>
+    <testcase name="should have a edit controller" time="0.002" classname="Chrome 28.0 (Mac).comment_edit comments_EditCtrl"/>
+    <testcase name="should attach a comment to the scope and save it via the Comment service" time="0.002" classname="Chrome 28.0 (Mac).comment_edit comments_EditCtrl save function"/>
+    <testcase name="should call Comment&apos; save function" time="0.002" classname="Chrome 28.0 (Mac).comment_edit comments_EditCtrl save function"/>
+    <system-out><![CDATA[
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>
