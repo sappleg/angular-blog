@@ -19,11 +19,11 @@ files = [
 ];
 
 exclude = ['src/app/rebuildTree.js'];
-//
+
 // test results reporter to use
 // possible values: dots || progress || growl
-reporters = ['progress'];
-//
+reporters = ['progress', 'dots', 'junit'];
+
 // web server port
 port = 8080;
 
@@ -47,7 +47,7 @@ singleRun = false;
 browsers = ['Chrome'];
 
 junitReporter = {
-    outputFile: 'test-results.xml'
+    outputFile: 'log/test-results.xml'
 };
 
 //var sharedConfig = require('./karma-shared.conf.js');
