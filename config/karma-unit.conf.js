@@ -45,6 +45,10 @@ singleRun = false;
 // break from module
 browsers = ['Chrome'];
 
+junitReporter = {
+    outputFile: 'test-results.xml'
+};
+
 //var sharedConfig = require('./karma-shared.conf');
 
 //module.exports = function(config) {
