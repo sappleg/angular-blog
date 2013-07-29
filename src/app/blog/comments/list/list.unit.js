@@ -17,27 +17,34 @@ describe('comments.list', function() {
     });
 
     describe('comments.ListCtrl', function() {
-        var $scope, listCtrl, Comment;
+        var $scope, listCtrl, Comment, CommentPromise, fakeComment, fakeComments;
         var routeParamsStub = jasmine.createSpy('routeParamsStub');
 
         beforeEach(inject(function($injector, $controller, $rootScope) {
+            fakeComment = {
+                id: '51e8861253d4c904e7fee371',
+                email: 'spencerdev@maasive.net',
+                text: 'fake text'
+            };
+            fakeComments = {
+                '51e8861253d4c904e7fee371': fakeComment
+            };
+
             $scope = $rootScope.$new();
 
-            //TODO: hash out routeParams stub
-            routeParamsStub.postId = '7';
+            routeParamsStub.id = fakeComment.id;
 
-            //TODO: look into promise objects for query function
             Comment = $injector.get('Comment');
-            spyOn(Comment, 'query');
-            Comment.query = function(params) {
-                this.then = function(callback) {
-                    callback();
-                }
-            };
             Comment.remove = function(params, callback) {
                 callback();
                 return params;
             };
+            CommentPromise = {
+                then: function(callback) {
+                    callback(fakeComments);
+                }
+            };
+            Comment.query = jasmine.createSpy('query').andReturn(CommentPromise);
 
             listCtrl = $controller('comments.ListCtrl', {
                 $scope: $scope,
@@ -46,8 +53,8 @@ describe('comments.list', function() {
             })
         }));
 
-        xit('should get all the comments for a post', function() {
-            expect(Comment.query).toHaveBeenCalled();
+        it('should get all the comments for a post', function() {
+            expect(Comment.query).toHaveBeenCalledWith({postId: routeParamsStub.id})
         });
     });
 });
