@@ -23,13 +23,17 @@ angular.module('blog.posts', [
 
             $http({method: 'GET', url: _api+ '/posts/'})
                 .success(function(data) {
-                    data = _.map(data, function(value) {
-                        // TODO: abstract away the timestamp calculation from this controller to make more reusable
+                    angular.forEach(data, function(value) {
                         var timestamp = value.id.toString().substring(0, 8);
                         value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
-
-                        return value;
                     });
+//                    data = _.map(data, function(value) {
+//                        // TODO: abstract away the timestamp calculation from this controller to make more reusable
+//                        var timestamp = value.id.toString().substring(0, 8);
+//                        value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
+//
+//                        return value;
+//                    });
 
                     deferred.resolve(data);
                 })

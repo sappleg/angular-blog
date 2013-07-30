@@ -1,2 +1,2 @@
-This is a blogging template in the works.  It will be using AngularJS (angularjs.org) as the frontend framework
-and Maasive (maasive.net) as the backend framework.  Any advice and pull requests are welcome!
+This is a blogging template in the works.  It will be using [AngularJS](angularjs.org) as the frontend framework
+and [Maasive](maasive.net) as the backend framework.  Any advice and pull requests are welcome!
