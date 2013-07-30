@@ -57,7 +57,7 @@ describe('comment.edit', function() {
 
             beforeEach(function() {
 //                spyOn(commentNamespace, 'Comment');
-                spyOn(Comment.prototype, 'constructor').andCallThrough();
+//                spyOn(Comment.prototype, 'constructor').andCallThrough();
                 spyOn(Comment, 'save');
                 $scope.save(mockComment);
             });

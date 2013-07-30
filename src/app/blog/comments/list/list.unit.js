@@ -17,34 +17,37 @@ describe('comments.list', function() {
     });
 
     describe('comments.ListCtrl', function() {
-        var $scope, listCtrl, Comment, CommentPromise, fakeComment, fakeComments;
+        var $scope, listCtrl, Comment, CommentPromise, fakeComments;
         var routeParamsStub = jasmine.createSpy('routeParamsStub');
 
         beforeEach(inject(function($injector, $controller, $rootScope) {
-            fakeComment = {
-                id: '51e8861253d4c904e7fee371',
-                email: 'spencerdev@maasive.net',
-                text: 'fake text'
-            };
-            fakeComments = {
-                '51e8861253d4c904e7fee371': fakeComment
-            };
+            fakeComments = [
+                {
+                    id: '51e8861253d4c904e7fee371',
+                    email: 'spencerdev@maasive.net',
+                    text: 'fake text'
+                },
+                {
+                    id: '51e8861253d4c904e7fee372',
+                    email: 'spencerdev@maasive.net',
+                    text: 'fake text 2'
+                }
+            ];
 
             $scope = $rootScope.$new();
 
-            routeParamsStub.id = fakeComment.id;
+            routeParamsStub.id = fakeComments[0].id;
 
-            Comment = $injector.get('Comment');
-            Comment.remove = function(params, callback) {
-                callback();
-                return params;
-            };
             CommentPromise = {
                 then: function(callback) {
                     callback(fakeComments);
                 }
             };
+
+            Comment = $injector.get('Comment');
             Comment.query = jasmine.createSpy('query').andReturn(CommentPromise);
+            Comment.remove = jasmine.createSpy('remove');
+
 
             listCtrl = $controller('comments.ListCtrl', {
                 $scope: $scope,
@@ -54,7 +57,18 @@ describe('comments.list', function() {
         }));
 
         it('should get all the comments for a post', function() {
+            var timestamp = fakeComments[0].id.toString().substring(0, 8);
             expect(Comment.query).toHaveBeenCalledWith({postId: routeParamsStub.id})
+            //TODO: figure out why this is an object instead of an array
+//            expect(typeof $scope.comments).toBe('array');
+            expect($scope.comments.length).toBe(2);
+            expect($scope.comments[0].timestamp.getDate()).toBe(new Date(parseInt(timestamp, 16) * 1000).getDate())
+        });
+
+        //TODO: figure out how to actually test removal of comment object
+        it('should be able to delete a comment', function() {
+            $scope.destroy(fakeComments[0]);
+            expect(Comment.remove).toHaveBeenCalled();
         });
     });
 });

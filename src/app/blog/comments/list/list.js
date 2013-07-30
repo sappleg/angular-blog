@@ -14,12 +14,10 @@ angular.module('comments.list', [])
 
         Comment.query({postId: $routeParams.id})
             .then(function(data) {
-                $scope.comments = _.map(data, function(value) {
+                $scope.comments = angular.forEach(data, function(value) {
                     // TODO: abstract away the timestamp calculation from this controller to make more reusable
                     var timestamp = value.id.toString().substring(0, 8);
                     value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
-
-                    return value;
                 });
             });
 

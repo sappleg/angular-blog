@@ -25,7 +25,7 @@ exclude = ['src/app/rebuildTree.js'];
 //
 // test results reporter to use
 // possible values: dots || progress || growl
-reporters = ['progress', 'dots', 'junit'];
+reporters = ['dots', 'junit'];
 
 // web server port
 port = 8080;
