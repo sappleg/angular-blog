@@ -1,3 +1,2 @@
-This is a personal blog I am building in AngularJS to learn the
-framework.  I currently have it ported to Josh Austin's Maasive backend
-solution.  Any feedback would be appreciated!
+This is a blogging template in the works.  It will be using AngularJS (angularjs.org) as the frontend framework
+and Maasive (maasive.net) as the backend framework.  Any advice and pull requests are welcome!
