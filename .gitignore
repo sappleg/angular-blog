@@ -1,7 +1,7 @@
 node_modules
 app/components
 dist
-log
+log/
 .tmp
 .sass-cache
 .idea
