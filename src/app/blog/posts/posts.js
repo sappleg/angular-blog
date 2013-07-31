@@ -23,17 +23,11 @@ angular.module('blog.posts', [
 
             $http({method: 'GET', url: _api+ '/posts/'})
                 .success(function(data) {
+                    // TODO: abstract away the timestamp calculation from this controller to make more reusable
                     angular.forEach(data, function(value) {
                         var timestamp = value.id.toString().substring(0, 8);
                         value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
                     });
-//                    data = _.map(data, function(value) {
-//                        // TODO: abstract away the timestamp calculation from this controller to make more reusable
-//                        var timestamp = value.id.toString().substring(0, 8);
-//                        value.timestamp = new Date(parseInt(timestamp, 16) * 1000);
-//
-//                        return value;
-//                    });
 
                     deferred.resolve(data);
                 })
@@ -69,9 +63,6 @@ angular.module('blog.posts', [
         };
 
         Post.update = function(params, post, callback) {
-            //TODO: get with Josh to fix this bug
-            post.email = "spencerdev@maasive.net";
-
             $http({method: 'PUT', url: _api + '/posts/' + params.id, data: post, withCredentials: true})
                 .success(function() {
                     callback();
