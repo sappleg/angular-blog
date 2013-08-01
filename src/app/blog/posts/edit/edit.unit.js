@@ -80,5 +80,6 @@ describe('posts.edit', function() {
         it('should get the blog post to edit', function() {
             expect(Post.get).toHaveBeenCalledWith({id: $routeParams.id});
         });
+
     });
 });
