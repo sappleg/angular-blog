@@ -15,15 +15,13 @@ angular.module('app', [
         'nav'
     ])
 
-    .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+    .config(['$routeProvider', '$httpProvider', function($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'app/meta/about/about.html',
             controller: 'meta.AboutCtrl',
             activeTab: 'about'
         });
         $routeProvider.otherwise({redirectTo: '/'});
-
-//        delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }])
 
     .filter('interpolate', ['version', function(version) {

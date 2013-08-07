@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
+/*global beforeEach, describe, it, expect, inject */
+
 'use strict';
 
 describe('filter', function() {

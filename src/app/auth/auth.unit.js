@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
+/*global beforeEach, afterEach, describe, it, expect, inject, jasmine */
+
 'use strict';
 
 describe('auth', function() {
@@ -21,7 +23,7 @@ describe('auth', function() {
 
             Auth = $injector.get('Auth');
             callback = jasmine.createSpy();
-        })
+        });
     });
 
     afterEach(function() {

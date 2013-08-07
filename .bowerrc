@@ -1,4 +1,4 @@
 {
     "directory": "src/components",
-    "json": "config/bower.json"
+    "json": "bower.json"
 }

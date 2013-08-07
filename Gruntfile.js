@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     };
 
     try {
-        yeomanConfig.app = require('./config/bower.json').appPath || yeomanConfig.app;
+        yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
     } catch (e) {}
 
     grunt.initConfig({
@@ -64,7 +64,7 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
-//                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, '.tmp'),
 //                            need to change for testing
 //                            mountFolder(connect, 'test')
                         ];
@@ -151,7 +151,9 @@ module.exports = function (grunt) {
                 files: {
                     '<%= yeoman.dist %>/scripts/scripts.js': [
                         '.tmp/scripts/{,*/}*.js',
-                        '<%= yeoman.app %>/app/{,*/}*.js'
+                        '<%= yeoman.app %>/app/{,*/}*.js',
+                        '!<%= yeoman.app %>/app/{,*/}*.unit.js',
+                        '!<%= yeoman.app %>/app/{,*/}*.e2e.js'
                     ]
                 }
             }
@@ -205,7 +207,8 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.app %>',
-                    src: ['*.html', 'views/*.html'],
+//                    src: ['*.html', '{,*/}/*.html'],
+                    src: ['*.html', 'app/**/*.html'],
                     dest: '<%= yeoman.dist %>'
                 }]
             }
@@ -293,14 +296,14 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'jshint',
-        'test',
+//        'test',
         'coffee',
+        'concat',
         'compass:dist',
         'useminPrepare',
         'imagemin',
         'cssmin',
         'htmlmin',
-        'concat',
         'copy',
         'cdnify',
         'ngmin',

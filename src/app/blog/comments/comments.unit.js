@@ -6,6 +6,10 @@
  * To change this template use File | Settings | File Templates.
  */
 
+/*global beforeEach, afterEach */
+/*global describe, it, expect */
+/*global window, eb, loadFixtures */
+
 'use strict';
 
 //TODO: need more coverage for constructor and destroy method
