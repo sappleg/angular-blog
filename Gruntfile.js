@@ -151,9 +151,11 @@ module.exports = function (grunt) {
                 files: {
                     '<%= yeoman.dist %>/scripts/scripts.js': [
                         '.tmp/scripts/{,*/}*.js',
-                        '<%= yeoman.app %>/app/{,*/}*.js',
-                        '!<%= yeoman.app %>/app/{,*/}*.unit.js',
-                        '!<%= yeoman.app %>/app/{,*/}*.e2e.js'
+                        '<%= yeoman.app %>/app/**/*.js',
+                        '!<%= yeoman.app %>/app/**/*.unit.js',
+                        '!<%= yeoman.app %>/app/**/*.e2e.js',
+                        '!<%= yeoman.app %>/app/mock.js',
+                        '!<%= yeoman.app %>/app/rebuildTree.js'
                     ]
                 }
             }
@@ -296,7 +298,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'jshint',
-//        'test',
+        'test',
         'coffee',
         'concat',
         'compass:dist',
