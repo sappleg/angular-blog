@@ -1,24 +1,43 @@
 @import "compass_twitter_bootstrap";
 
 .name {
-    display: inline-block;
+    display: block;
+    text-align: center;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.motto {
+    display: block;
+    text-align: center;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #header {
     background-image: url('../../images/cover.jpg');
+    left: 0px;
+    right: 75%;
+    height: 100%;
+    position: fixed;
+    display: inline-block;
+}
+
+#app-container {
+    left: 25%;
+    right: 0px;
+    height: 100%;
+    position: absolute;
+    display: inline-block;
+    margin: 20px 20px 20px 20px;
 }
 
 #header h2 a {
     color: white;
-}
-
-#header h2 a:hover {
-    color: rgba(182, 180, 180, 0.74);
-    text-decoration: none;
-}
-
-.btn { /* overrides bootstrap's button style to add a bottom margin*/
-    margin-bottom: 20px;
 }
 
 .post-timestamp {
@@ -27,6 +46,9 @@
 
 .profile-pic {
     margin: 20px 20px 20px 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .post-title {
@@ -37,4 +59,24 @@
 
 .post-body {
     margin: 20px 20px 20px 20px;
+}
+
+a {
+    &.login {
+        color: white;
+
+        &:hover {
+            color: rgba(182, 180, 180, 0.74);
+            text-decoration: none;
+        }
+    }
+
+    &.logout {
+        color: white;
+
+        &:hover {
+            color: rgba(182, 180, 180, 0.74);
+            text-decoration: none;
+        }
+    }
 }
