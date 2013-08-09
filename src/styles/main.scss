@@ -62,7 +62,7 @@
 }
 
 a {
-    &.login {
+    &.auth-button {
         color: white;
 
         &:hover {
@@ -70,13 +70,11 @@ a {
             text-decoration: none;
         }
     }
+}
 
-    &.logout {
-        color: white;
-
-        &:hover {
-            color: rgba(182, 180, 180, 0.74);
-            text-decoration: none;
-        }
-    }
+.social {
+    width: 225px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

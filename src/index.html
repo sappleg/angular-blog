@@ -28,8 +28,8 @@
 
     <!-- Add your site or application content here -->
     <div id="header" ng-controller="meta.AboutCtrl">
-        <a href="#/login" class="login" ng-show="!auth.loggedIn">login</a>
-        <a ng-click="logout()" class="logout" ng-show="auth.loggedIn">logout</a>
+        <a href="#/login" class="auth-button" ng-show="!auth.loggedIn">login</a>
+        <a ng-click="logout()" class="auth-button" ng-show="auth.loggedIn">logout</a>
         <img src="images/me.jpg" class="profile-pic img-circle img-polaroid">
         <p class="name">Spencer Applegate</p>
         <p class="motto">Developer | Engineer | Entrepreneur | Researcher</p>
