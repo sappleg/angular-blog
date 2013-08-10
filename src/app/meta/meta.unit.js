@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
+/*global describe */
+
 'use strict';
 
 describe('meta', function() {

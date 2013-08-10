@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
+/*global beforeEach, afterEach, describe, it, expect, inject, jasmine */
+
 'use strict';
 
 describe('posts.view', function() {

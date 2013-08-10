@@ -53,4 +53,4 @@ angular.module('auth', [
                 $location.path('/');
             });
         };
-    }])
+    }]);
