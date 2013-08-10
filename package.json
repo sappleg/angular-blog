@@ -1,50 +1,51 @@
 {
-    "name": "spencerapplegate-blog",
-    "version": "0.0.1",
-    "description": "Personal blog for spencer applegate (spencerapplegate.com)",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/spencerapplegate/angular-blog"
-    },
-    "bugs": {
-        "url": "https://github.com/spencerapplegate/angular-blog/issues"
-    },
-    "keywords": [
-        "spencerapplegate",
-        "blog",
-        "js",
-        "javascript"
-    ],
-    "author": "Spencer Applegate <spencer.applegate@gmail.com>",
-    "contributors": [
-        "Spencer Applegate <spencer.applegate3@gmail.com>"
-    ],
-    "dependencies": {},
-    "peerDependencies": {},
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-copy": "~0.4.0",
-        "grunt-contrib-concat": "~0.1.3",
-        "grunt-contrib-coffee": "~0.6.4",
-        "grunt-contrib-uglify": "~0.2.0",
-        "grunt-contrib-compass": "~0.1.3",
-        "grunt-contrib-jshint": "~0.3.0",
-        "grunt-contrib-cssmin": "~0.5.0",
-        "grunt-contrib-connect": "~0.2.0",
-        "grunt-contrib-clean": "~0.4.0",
-        "grunt-contrib-htmlmin": "~0.1.1",
-        "grunt-contrib-imagemin": "~0.1.2",
-        "grunt-contrib-livereload": "~0.1.2",
-        "grunt-usemin": "~0.1.10",
-        "grunt-regarde": "~0.1.1",
-        "grunt-rev": "~0.1.0",
-        "grunt-karma": "~0.3.0",
-        "grunt-open": "~0.2.0",
-        "matchdep": "~0.1.1",
-        "grunt-google-cdn": "~0.1.1",
-        "grunt-ngmin": "~0.0.2"
-    },
-        "engines": {
-        "node": ">=0.8.0"
-    }
+  "name": "spencerapplegate-blog",
+  "version": "0.0.1",
+  "description": "Personal blog for spencer applegate (spencerapplegate.com)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/spencerapplegate/angular-blog"
+  },
+  "bugs": {
+    "url": "https://github.com/spencerapplegate/angular-blog/issues"
+  },
+  "keywords": [
+    "spencerapplegate",
+    "blog",
+    "js",
+    "javascript"
+  ],
+  "author": "Spencer Applegate <spencer.applegate@gmail.com>",
+  "contributors": [
+    "Spencer Applegate <spencer.applegate3@gmail.com>"
+  ],
+  "dependencies": {},
+  "peerDependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-coffee": "~0.6.4",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-compass": "~0.1.3",
+    "grunt-contrib-jshint": "~0.3.0",
+    "grunt-contrib-cssmin": "~0.5.0",
+    "grunt-contrib-connect": "~0.2.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-htmlmin": "~0.1.1",
+    "grunt-contrib-imagemin": "~0.1.2",
+    "grunt-contrib-livereload": "~0.1.2",
+    "grunt-usemin": "~0.1.10",
+    "grunt-regarde": "~0.1.1",
+    "grunt-rev": "~0.1.0",
+    "grunt-karma": "~0.3.0",
+    "grunt-open": "~0.2.0",
+    "matchdep": "~0.1.1",
+    "grunt-google-cdn": "~0.1.1",
+    "grunt-ngmin": "~0.0.2",
+    "grunt-shell": "~0.3.1"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
 }

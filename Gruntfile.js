@@ -266,6 +266,18 @@ module.exports = function (grunt) {
                     ]
                 }]
             }
+        },
+        shell: {
+            deploy: {
+                options: {
+                    cwd: 'dist/'
+                },
+                command: [
+                    'git add . -A',
+                    'git commit -m \"Deployment ' + Date.now().toString(),
+                    'git push production'
+                ].join('&&')
+            }
         }
     });
 
@@ -312,6 +324,10 @@ module.exports = function (grunt) {
         'uglify',
         'rev',
         'usemin'
+    ]);
+
+    grunt.registerTask('deploy', [
+        'shell:deploy'
     ]);
 
     grunt.registerTask('default', ['build']);
