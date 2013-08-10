@@ -10,7 +10,7 @@
 
 angular.module('nav', [])
 
-    .controller('NavCtrl', ['$scope', '$route', function($scope, $route) {
+    .controller('nav.NavCtrl', ['$scope', '$route', function($scope, $route) {
         // sets the route of the navigation controller's scope
         $scope.$route = $route;
     }]);

@@ -42,4 +42,15 @@ angular.module('auth', [
                 this.loggedIn = isLoggedIn;
             }
         };
-    }]);
+    }])
+
+    .controller('auth.AuthCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
+        $scope.auth = Auth;
+
+        $scope.logout = function() {
+            Auth.logout(function() {
+                $scope.auth.setLoggedIn(false);
+                $location.path('/');
+            });
+        };
+    }])

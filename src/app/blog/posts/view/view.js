@@ -32,20 +32,8 @@ angular.module('posts.view', [])
         });
     }])
 
-    .controller('posts.ViewCtrl', ['$scope', '$routeParams', 'load', 'Comment', 'Post', 'Auth', function($scope, $routeParams, load, Comment, Post, Auth) {
-        // TODO: move this to a resolve service on routeProvider
+    .controller('posts.ViewCtrl', ['$scope', 'load', 'Auth', function($scope, load, Auth) {
         $scope.post = load;
 
-        // expose Auth to the scope
         $scope.auth = Auth;
-
-        $scope.destroy = function(id) {
-            Comment.remove({id: id}, function() {
-                Post.get({id: $routeParams.id}).then(function(post) {
-                    $scope.post.comments = _.map(post.comments, function(value) {
-                        return value;
-                    });
-                });
-            });
-        };
     }])

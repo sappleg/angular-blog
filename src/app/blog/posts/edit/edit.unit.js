@@ -85,5 +85,6 @@ describe('posts.edit', function() {
             expect(Post.get).toHaveBeenCalledWith({id: $routeParams.id});
         });
 
+        //TODO: finish rest of coverage
     });
 });

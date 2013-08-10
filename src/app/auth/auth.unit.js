@@ -10,6 +10,7 @@
 
 'use strict';
 
+//TODO: add tests for login/out
 describe('auth', function() {
     var $httpBackend, Auth, callback, api;
 

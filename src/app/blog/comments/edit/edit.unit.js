@@ -79,7 +79,7 @@ describe('comment.edit', function() {
                 expect($scope.comment.postId).toBe('7');
             });
 
-            it('should call Comment\' save function', function() {
+            it('should call Comment\'s save function', function() {
                 expect(Comment.save).toHaveBeenCalled();
             });
         });
