@@ -30,5 +30,5 @@ angular.module('app', [
         };
     }])
 
-    .value('version', '0.1')
+    .value('version', '0.0.1')
     .value('_api', 'http://dev.maasive.net/SuperSpock/spencer');
