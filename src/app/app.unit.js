@@ -15,11 +15,11 @@ describe('app', function() {
     beforeEach(module('app'));
 
     it('should interpolate the version number in strings with the correct qualifier', inject(function(interpolateFilter) {
-        expect(interpolateFilter('%VERSION%')).toBe('0.1');
+        expect(interpolateFilter('%VERSION%')).toBe('0.0.1');
     }));
 
     it('should provide a version and Maasive api', inject(function(version, _api) {
-        expect(version).toBe('0.1');
+        expect(version).toBe('0.0.1');
         expect(_api).toBe('http://dev.maasive.net/SuperSpock/spencer');
     }));
 
