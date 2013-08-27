@@ -21,22 +21,14 @@ module.exports = function (grunt) {
     grunt.initConfig({
         yeoman: yeomanConfig,
         watch: {
-            coffee: {
-                files: ['<%= yeoman.app %>/app/{,**/}*.coffee'],
-                tasks: ['coffee:dist']
-            },
-            coffeeTest: {
-                files: ['<%= yeoman.app %>/app/{,**/}*spec.coffee'],
-                tasks: ['coffee:test']
-            },
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,**/}*.{scss,sass}'],
-                tasks: ['compass']
+                tasks: ['compass:dev']
             },
             livereload: {
                 files: [
                     '<%= yeoman.app %>/{,**/}*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+//                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
                     '{.tmp,<%= yeoman.app %>}/app/{,**/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ],
@@ -54,8 +46,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             lrSnippet,
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, yeomanConfig.app)
+                            mountFolder(connect, '.tmp')
                         ];
                     }
                 }
@@ -64,9 +55,7 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
-                            mountFolder(connect, '.tmp'),
-//                            need to change for testing
-//                            mountFolder(connect, 'test')
+                            mountFolder(connect, '.tmp')
                         ];
                     }
                 }
@@ -78,7 +67,7 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            dist: {
+            prod: {
                 files: [{
                     dot: true,
                     src: [
@@ -88,7 +77,7 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            server: '.tmp'
+            dev: '.tmp'
         },
         jshint: {
             options: {
@@ -109,26 +98,6 @@ module.exports = function (grunt) {
                 singleRun: true
             }
         },
-        coffee: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/app',
-                    src: '{,*/}*.coffee',
-                    dest: '.tmp/scripts',
-                    ext: '.js'
-                }]
-            },
-            test: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/app',
-                    src: '{,*/}*.coffee',
-                    dest: '.tmp/spec',
-                    ext: '.js'
-                }]
-            }
-        },
         compass: {
             options: {
                 sassDir: '<%= yeoman.app %>/styles',
@@ -139,8 +108,8 @@ module.exports = function (grunt) {
                 importPath: '<%= yeoman.app %>/components',
                 relativeAssets: true
             },
-            dist: {},
-            server: {
+            prod: {},
+            dev: {
                 options: {
                     debugInfo: true
                 }
@@ -252,7 +221,7 @@ module.exports = function (grunt) {
             }
         },
         copy: {
-            dist: {
+            prod: {
                 files: [{
                     expand: true,
                     dot: true,
@@ -265,18 +234,20 @@ module.exports = function (grunt) {
                         'styles/fonts/*'
                     ]
                 }]
-            }
-        },
-        shell: {
-            deploy: {
-                options: {
-                    cwd: 'dist/'
-                },
-                command: [
-                    'git add . -A',
-                    'git commit -m \"Deployment ' + Date.now().toString(),
-                    'git push production'
-                ].join('&&')
+            },
+            dev: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.app %>',
+                    dest: '.tmp/',
+                    src: [
+                        'app/**/*',
+                        'components/**/*',
+                        'images/**/*',
+                        '*.html'
+                    ]
+                }]
             }
         }
     });
@@ -284,50 +255,37 @@ module.exports = function (grunt) {
     grunt.renameTask('regarde', 'watch');
 
     grunt.registerTask('server', [
-        'clean:server',
-        'coffee:dist',
-        'compass:server',
+        'clean:dev',
+        'copy:dev',
+        'compass:dev',
         'livereload-start',
         'connect:livereload',
         'open',
         'watch'
     ]);
 
-//    Old test task
-//    grunt.registerTask('test', [
-//        'clean:server',
-//        'coffee',
-//        'compass',
-//        'connect:test',
-//        'karma:unit'
-//    ]);
-
     grunt.registerTask('test', [
+        'clean:dev',
         'connect:test',
         'karma:unit'
     ]);
 
     grunt.registerTask('build', [
-        'clean:dist',
+        'clean:prod',
         'jshint',
         'test',
-        'coffee',
         'concat',
-        'compass:dist',
+        'compass:prod',
         'useminPrepare',
         'imagemin',
         'cssmin',
         'htmlmin',
-        'copy',
+        'copy:prod',
         'cdnify',
         'ngmin',
         'uglify',
         'rev',
         'usemin'
-    ]);
-
-    grunt.registerTask('deploy', [
-        'shell:deploy'
     ]);
 
     grunt.registerTask('default', ['build']);
