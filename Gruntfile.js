@@ -266,7 +266,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
-        'clean:dev',
+        'clean:local',
         'connect:test',
         'karma:unit'
     ]);
