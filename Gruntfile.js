@@ -77,7 +77,7 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            dev: '.tmp'
+            local: '.tmp'
         },
         jshint: {
             options: {
@@ -111,7 +111,8 @@ module.exports = function (grunt) {
             prod: {},
             dev: {
                 options: {
-                    debugInfo: true
+                    debugInfo: true,
+                    outputStyle: 'expanded'
                 }
             }
         },
@@ -235,7 +236,7 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            dev: {
+            local: {
                 files: [{
                     expand: true,
                     dot: true,
@@ -245,7 +246,7 @@ module.exports = function (grunt) {
                         'app/**/*',
                         'components/**/*',
                         'images/**/*',
-                        '*.html'
+                        '*.html*'
                     ]
                 }]
             }
@@ -255,8 +256,8 @@ module.exports = function (grunt) {
     grunt.renameTask('regarde', 'watch');
 
     grunt.registerTask('server', [
-        'clean:dev',
-        'copy:dev',
+        'clean:local',
+        'copy:local',
         'compass:dev',
         'livereload-start',
         'connect:livereload',
