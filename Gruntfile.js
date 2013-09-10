@@ -273,20 +273,20 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:prod'
-//        'jshint',
-//        'test',
-//        'concat',
-//        'compass:prod',
-//        'useminPrepare',
-//        'imagemin',
-//        'cssmin',
-//        'htmlmin',
-//        'copy:prod',
-//        'cdnify',
-//        'ngmin',
-//        'uglify',
-//        'rev',
-//        'usemin'
+        'jshint',
+        'concat',
+        'compass:prod',
+        'useminPrepare',
+        'imagemin',
+        'cssmin',
+        'htmlmin',
+        'copy:prod',
+        'cdnify',
+        'ngmin',
+        'uglify',
+        'rev',
+        'usemin',
+        'test'
     ]);
 
     grunt.registerTask('default', ['build']);
