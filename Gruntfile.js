@@ -266,7 +266,10 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
+        'clean:local',
+        /* CI SHIT */
         'clean:prod',
+        'jshint',
         'connect:test',
         'karma:unit'
     ]);
