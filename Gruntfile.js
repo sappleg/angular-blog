@@ -274,7 +274,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:prod',
         'jshint',
-        'test',
+//        'test',
         'concat',
         'compass:prod',
         'useminPrepare',
