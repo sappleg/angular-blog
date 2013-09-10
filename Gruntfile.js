@@ -267,22 +267,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'clean:local',
-        /* CI SHIT */
-//        'clean:prod',
-//        'jshint',
-//        'concat',
-//        'compass:prod',
-//        'useminPrepare',
-//        'imagemin',
-//        'cssmin',
-//        'htmlmin',
-//        'copy:prod',
-//        'cdnify',
-//        'ngmin',
-//        'uglify',
-//        'rev',
-//        'usemin',
-        /* CI SHIT */
         'connect:test',
         'karma:unit'
     ]);
@@ -298,7 +282,6 @@ module.exports = function (grunt) {
         'cssmin',
         'htmlmin',
         'copy:prod',
-        'cdnify',
         'ngmin',
         'uglify',
         'rev',
