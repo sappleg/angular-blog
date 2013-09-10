@@ -270,6 +270,8 @@ module.exports = function (grunt) {
         /* CI SHIT */
         'clean:prod',
         'jshint',
+        'concat',
+        /* CI SHIT */
         'connect:test',
         'karma:unit'
     ]);
