@@ -12,7 +12,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" href="images/favicon.png" />
     <!-- build:css styles/main.css -->
-    <!--<link rel="stylesheet" href="components/bootstrap/css/bootstrap.css" />-->
+    <link rel="stylesheet" href="components/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -22,7 +22,7 @@
     <![endif]-->
 
     <!--[if lt IE 9]>
-    <script src="components/es5-shim/es5-shim.js"></script>
+    <script src="components/es5-shim/es5-shim.min.js"></script>
     <script src="components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
@@ -46,17 +46,21 @@
     </div>
 
     <!--External libraries-->
-    <!-- TODO: Have underscore and jquery build in directly -->
-    <script src="components/underscore/underscore.js"></script>
-    <script src="components/jquery/jquery.js"></script>
+    <!--<script src="components/underscore/underscore.min.js"></script>-->
 
+    <!-- Will be cdnified -->
+    <script src="components/jquery/jquery.js"></script>
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="components/angular-mocks/angular-mocks.js"></script>
+    <!--<script src="components/angular-mocks/angular-mocks.js"></script>-->
 
     <!-- build:js scripts/scripts.js -->
+    <!-- Necessary components -->
+    <script src="components/underscore/underscore.min.js"></script>
+    <script src="components/angular-mocks/angular-mocks.js"></script>
+
     <script src="app/app.js"></script>
     <script src="app/auth/auth.js"></script>
     <script src="app/auth/login/login.js"></script>

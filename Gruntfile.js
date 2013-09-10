@@ -230,7 +230,7 @@ module.exports = function (grunt) {
                     dest: '<%= yeoman.dist %>',
                     src: [
                         '*.{ico,txt}',
-                        'components/**/*',
+//                        'components/**/*',
                         'images/{,*/}*.{gif,webp}',
                         'styles/fonts/*'
                     ]
@@ -274,7 +274,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:prod',
         'jshint',
-        'test',
+//        'test',
         'concat',
         'compass:prod',
         'useminPrepare',
