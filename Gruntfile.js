@@ -272,7 +272,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'clean:prod'
+        'clean:prod',
         'jshint',
         'concat',
         'compass:prod',
