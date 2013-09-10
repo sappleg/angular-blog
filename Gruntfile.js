@@ -272,21 +272,21 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'clean:prod',
-        'jshint',
+        'clean:prod'
+//        'jshint',
 //        'test',
-        'concat',
-        'compass:prod',
-        'useminPrepare',
-        'imagemin',
-        'cssmin',
-        'htmlmin',
-        'copy:prod',
-        'cdnify',
-        'ngmin',
-        'uglify',
-        'rev',
-        'usemin'
+//        'concat',
+//        'compass:prod',
+//        'useminPrepare',
+//        'imagemin',
+//        'cssmin',
+//        'htmlmin',
+//        'copy:prod',
+//        'cdnify',
+//        'ngmin',
+//        'uglify',
+//        'rev',
+//        'usemin'
     ]);
 
     grunt.registerTask('default', ['build']);
