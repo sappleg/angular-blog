@@ -271,8 +271,6 @@ module.exports = function (grunt) {
         'clean:prod',
         'jshint',
         'concat',
-        'compass:prod',
-        'useminPrepare',
         /* CI SHIT */
         'connect:test',
         'karma:unit'
