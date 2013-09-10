@@ -271,7 +271,17 @@ module.exports = function (grunt) {
         'clean:prod',
         'jshint',
         'concat',
-        'compass:prod',
+//        'compass:prod',
+        'useminPrepare',
+        'imagemin',
+        'cssmin',
+        'htmlmin',
+        'copy:prod',
+        'cdnify',
+        'ngmin',
+        'uglify',
+        'rev',
+        'usemin',
         /* CI SHIT */
         'connect:test',
         'karma:unit'
